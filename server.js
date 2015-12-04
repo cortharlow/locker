@@ -15,7 +15,7 @@ app.use('/', express.static('public'))
 app.get('/api/:url', (req, res) => {
   console.log('Hit API search');
 
-  let apiUrl = 'http://api.embed.ly/1/extract?key=&<key>url=' + req.params.url;
+  let apiUrl = 'http://api.embed.ly/1/extract?key=&url=' + req.params.url;
 
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);

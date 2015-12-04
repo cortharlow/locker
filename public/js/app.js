@@ -2,9 +2,9 @@
 $(function() {
   console.log('Loaded!');
 
-  $('#add-article').off('click').on('click').click((event) => {
+  $('#article-button-add').off('click').on('click').click((event) => {
     event.preventDefault();
-    let articleUrl = $('#add-article-field').val();
+    let articleUrl = $('#article-url').val();
     let encodedUrl = encodeURIComponent(articleUrl);
     console.log(encodedUrl);
     $.ajax({
@@ -17,7 +17,7 @@ $(function() {
 });
 
 var articlePreview = function(data) {
-  var result = $('#json-data').append('<div>');
+  var result = $('#article-display').append('<div>');
   result.attr('class', 'article');
   if (data.title == null && data.description == null) {
     alert('Error: This article is in a format that cannot be saved.');
