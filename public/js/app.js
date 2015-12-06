@@ -17,6 +17,20 @@ $(function() {
     })
   });
 
+  $('#login').on('click', function(e){
+    e.preventDefault();
+    $.post("http://localhost:3000/user/auth", {email: $('#login-email').val(), password: $('#login-password').val()}, function(data){
+      console.log(data);
+      if(data.token){
+        alert('LOGIN SUCCESSFUL');
+        token = data.token;
+        $ajaxSetup({
+          headers: {'x-access': token}
+        });
+      }
+    });
+  });
+
   $('#article-button-add').off('click').on('click').click((event) => {
     event.preventDefault();
     let articleUrl = $('#article-url').val();

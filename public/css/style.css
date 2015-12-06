@@ -132,24 +132,23 @@ html, body {
   width: 25%;
 }
 .signup-input-container button {
-  width: 180px;
-  line-height: 35px;
+  width: 280px;
+  line-height: 50px;
   background-color: #ff3b30; /* #2c93ff; */
   font-size: 20px;
-  /*font-family: 'Droid Sans', sans-serif;*/
   font-family: 'Droid Serif', serif;
-  color: white;
+  color: #ffffff;
   border-radius: 5px;
   border: 0;
 }
 .signup-input {
-  width: 174px;
-  height: 33px;
+  width: 259px;
+  height: 48px;
   border: 0;
   border-radius: 5px;
   font-family: 'Droid Sans', sans-serif;
-  font-size: 15px;
-  padding-left: 5px;
+  font-size: 18px;
+  padding-left: 20px;
   background-color: white;
   margin-bottom: 5%;
 }

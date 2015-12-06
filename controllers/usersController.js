@@ -48,9 +48,9 @@ function destroy(req, res){
 }
 
 function auth(req, res){
-  console.log('Body: ' + req.body.name);
+  console.log('Body: ' + req.body.email);
   User.findOne(
-    {name: req.body.name}, function(err, user){
+    {email: req.body.email}, function(err, user){
       if(err) throw err;
       if(!user) {
         res.json({success: false, message: "Authentication Failure"})
