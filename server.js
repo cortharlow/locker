@@ -5,8 +5,10 @@ const path = require('path');
 const request     = require('request');
 const bodyParser  = require('body-parser');
 const jwt = require('jsonwebtoken');
+let config = require('./config');
 const app = express();
-
+const secret = config.secret;
+const key = config.key;
 let server = require('http').createServer(app);
 
 // Require routes
@@ -41,17 +43,17 @@ db.once('open', function (callback) {
 app.use('/article', articleRoutes);
 app.use('/user', userRoutes);
 
-// app.get('/api/:url', (req, res) => {
-//   console.log('Hit API search');
-//
-//   let apiUrl = 'http://api.embed.ly/1/extract?key=cf79f9d2b40749328932cb7d7c403a04&url=' + req.params.url;
-//
-//   request(apiUrl, (err, response, body) => {
-//     let info = JSON.parse(body);
-//
-//     res.send(info);
-//   });
-// });
+app.get('/api/:url', (req, res) => {
+  console.log('Hit API search');
+
+  let apiUrl = 'http://api.embed.ly/1/extract?key=' + config.key + '&url=' + req.params.url;
+
+  request(apiUrl, (err, response, body) => {
+    let info = JSON.parse(body);
+
+    res.send(info);
+  });
+});
 
 server.listen(3000, function() {
   let host = server.address().address;

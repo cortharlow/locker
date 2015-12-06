@@ -3,7 +3,8 @@ let express = require('express');
 let router = express.Router();
 let user = require('../controllers/usersController');
 let expressJWT = require('express-jwt');
-
+let config = require('../config');
+let secret = config.secret;
 
 router.route('/')
   .all(expressJWT({
@@ -44,6 +45,5 @@ router.use(function(req, res, next) {
     })
   }
 });
-
 
 module.exports = router;
