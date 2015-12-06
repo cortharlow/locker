@@ -1,11 +1,17 @@
 'use strict';
 const express = require('express');
 const logger = require('morgan');
+const path = require('path');
 const request     = require('request');
 const bodyParser  = require('body-parser');
 const jwt = require('jsonwebtoken');
 const app = express();
-const server = require('http').createServer(app);
+
+let server = require('http').createServer(app);
+
+// Require routes
+let articleRoutes = require('./routes/articleRoutes');
+let userRoutes = require('./routes/userRoutes');
 
 // Add Angular and Underscore
 app.use('/scripts', express.static(__dirname + '/node_modules/angular'))
@@ -31,24 +37,24 @@ db.once('open', function (callback) {
   console.log('Database Connection Established');
 });
 
-// Require routes
-app.use('/api', apiRoutes);
-app.use('/users', userRoutes);
+// Specify routing
+app.use('/article', articleRoutes);
+app.use('/user', userRoutes);
 
-app.get('/api/:url', (req, res) => {
-  console.log('Hit API search');
+// app.get('/api/:url', (req, res) => {
+//   console.log('Hit API search');
+//
+//   let apiUrl = 'http://api.embed.ly/1/extract?key=cf79f9d2b40749328932cb7d7c403a04&url=' + req.params.url;
+//
+//   request(apiUrl, (err, response, body) => {
+//     let info = JSON.parse(body);
+//
+//     res.send(info);
+//   });
+// });
 
-  let apiUrl = 'http://api.embed.ly/1/extract?key=&url=' + req.params.url;
-
-  request(apiUrl, (err, response, body) => {
-    let info = JSON.parse(body);
-
-    res.send(info);
-  });
-});
-
-const server = app.listen(3000, () => {
+server.listen(3000, function() {
   let host = server.address().address;
   let port = server.address().port;
-  console.log('Server running...', host, port);
-})
+  console.log('express running', host, port);
+});

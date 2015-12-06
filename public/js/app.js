@@ -2,6 +2,21 @@
 $(function() {
   console.log('Loaded!');
 
+//Sign UP
+  let token;
+  $('#signup').on('click', function(e){
+    e.preventDefault();
+    $.post("http://localhost:3000/user/signup", {name: $('#name').val(), email: $('#email').val(), password: $('#password').val()}, function(data) {
+      if(data.token){
+        alert('SUCCESSFUL CREATION');
+        token = data.token;
+        $.ajaxSetup({
+          headers: {'x-access': token}
+        });
+      }
+    })
+  });
+
   $('#article-button-add').off('click').on('click').click((event) => {
     event.preventDefault();
     let articleUrl = $('#article-url').val();

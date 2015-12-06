@@ -1,13 +1,13 @@
 'use strict';
 let express = require('express');
 let router = express.Router();
-let use = require('../controllers/usersController');
+let user = require('../controllers/usersController');
 let expressJWT = require('express-jwt');
 
 
 router.route('/')
   .all(expressJWT({
-    secret: secret.
+    secret: secret,
     userProperty: 'auth'
   }))
   .get(user.get)
@@ -17,10 +17,33 @@ router.route('/')
 router.route('/auth')
   .post(user.auth);
 
-router.router('/signup')
+router.route('/signup')
   .post(user.create);
 
-router.router('/logout')
+router.route('/logout')
   .get(user.logout);
+
+// Verify protected routes
+router.use(function(req, res, next) {
+  console.log('Is this being hit?');
+  var token = req.body.token || req.query.token || req.headers['x-access'];
+  // Decode token
+  if(token) {
+    jst.verify(token, secret, function(err, decoded) {
+      if(err) {
+        return res.json({success: false, message: 'Token Authentication Failure'});
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'Missing Token'
+    })
+  }
+});
+
 
 module.exports = router;

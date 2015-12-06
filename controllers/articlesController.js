@@ -1,5 +1,5 @@
 'use strict';
-var Article = require('../models/Article');
+let Article = require('../models/Article');
 
 // POST
 function createArticle(request, response) {
@@ -16,10 +16,10 @@ function createArticle(request, response) {
 }
 
 // GET
-function getArticle(request, response) {
-}
+// function getArticle(request, response) {
+// }
 
 module.exports = {
   createArticle: createArticle,
-  getArticle: getArticle
+  // getArticle: getArticle
 }
