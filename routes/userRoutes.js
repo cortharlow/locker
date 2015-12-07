@@ -1,7 +1,7 @@
 'use strict';
 let express = require('express');
 let router = express.Router();
-let user = require('../controllers/usersController');
+let user = require('../controllers/users');
 let expressJWT = require('express-jwt');
 let config = require('../config');
 let secret = config.secret;
@@ -15,6 +15,9 @@ router.route('/')
   .put(user.update)
   .delete(user.destroy);
 
+router.route('/signup')
+  .post(user.create);
+
 router.route('/auth')
   .post(user.auth);
 
@@ -22,6 +25,7 @@ router.route('/auth')
   router.use(function(req, res, next) {
     console.log('Is this being hit?');
     var token = req.body.token || req.query.token || req.headers['x-access'];
+    console.log(token);
     // Decode token
     if(token) {
       jst.verify(token, secret, function(err, decoded) {
@@ -39,9 +43,6 @@ router.route('/auth')
       })
     }
   });
-
-router.route('/signup')
-  .post(user.create);
 
 router.route('/logout')
   .get(user.logout);

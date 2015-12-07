@@ -46,19 +46,6 @@ $(function() {
     });
   });
 });
-//   $('#article-button-add').off('click').on('click').click((event) => {
-//     event.preventDefault();
-//     let articleUrl = $('#article-url').val();
-//     let encodedUrl = encodeURIComponent(articleUrl);
-//     console.log(encodedUrl);
-//     $.ajax({
-//       url: 'http://localhost:3000/api/' + encodedUrl
-//     }).done(function(data) {
-//       console.log(data);
-//       articlePreview(data);
-//     });
-//   });
-// });
 
 var articlePreview = function(data) {
   var result = $('#article-display').append('<div>');
