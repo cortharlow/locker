@@ -62,7 +62,8 @@ function auth(req, res){
           res.json({
             success: true,
             message: "Authentication Success",
-            token: token
+            token: token,
+            user: user._id
           });
         }
       }

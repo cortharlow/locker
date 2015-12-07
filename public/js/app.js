@@ -2,14 +2,17 @@
 $(function() {
   console.log('Loaded!');
 
-//Sign UP
   let token;
+  let currentUser;
+
+//Sign UP
   $('#signup').on('click', function(e){
     e.preventDefault();
     $.post("http://localhost:3000/user/signup", {name: $('#name').val(), email: $('#email').val(), password: $('#password').val()}, function(data) {
       if(data.token){
         alert('SUCCESSFUL CREATION');
         token = data.token;
+        currentUser = data.currentUser._id;
         $.ajaxSetup({
           headers: {'x-access': token}
         });
@@ -24,26 +27,38 @@ $(function() {
       if(data.token){
         alert('LOGIN SUCCESSFUL');
         token = data.token;
-        $ajaxSetup({
+        currentUser = data.user;
+        console.log(currentUser);
+        $.ajaxSetup({
           headers: {'x-access': token}
         });
       }
     });
   });
 
-  $('#article-button-add').off('click').on('click').click((event) => {
-    event.preventDefault();
+  $('#article-button-add').on('click', function(e){
+    e.preventDefault();
     let articleUrl = $('#article-url').val();
     let encodedUrl = encodeURIComponent(articleUrl);
-    console.log(encodedUrl);
-    $.ajax({
-      url: 'http://localhost:3000/api/' + encodedUrl
-    }).done(function(data) {
+    $.post('http://localhost:3000/article/' + encodedUrl, { user: currentUser }, function(data){
       console.log(data);
       articlePreview(data);
     });
   });
 });
+//   $('#article-button-add').off('click').on('click').click((event) => {
+//     event.preventDefault();
+//     let articleUrl = $('#article-url').val();
+//     let encodedUrl = encodeURIComponent(articleUrl);
+//     console.log(encodedUrl);
+//     $.ajax({
+//       url: 'http://localhost:3000/api/' + encodedUrl
+//     }).done(function(data) {
+//       console.log(data);
+//       articlePreview(data);
+//     });
+//   });
+// });
 
 var articlePreview = function(data) {
   var result = $('#article-display').append('<div>');
