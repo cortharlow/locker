@@ -10,6 +10,7 @@ let article = new mongoose.Schema({
   url: {type: String, required: true},
   title: {type: String, required: true},
   description: {type: String, required: true},
+  content: {type: String, required: true},
   provider: String,
   image: String,
   created_at: {type: Date, default: Date.now, required: true}

@@ -1,15 +1,15 @@
 'use strict';
-const express = require('express');
-const logger = require('morgan');
-const path = require('path');
+const express     = require('express');
+const logger      = require('morgan');
+const path        = require('path');
 const request     = require('request');
 const bodyParser  = require('body-parser');
-const jwt = require('jsonwebtoken');
-let config = require('./config');
-const app = express();
-const secret = config.secret;
-const key = config.key;
-let server = require('http').createServer(app);
+const jwt         = require('jsonwebtoken');
+let config        = require('./config');
+const app         = express();
+const secret      = config.secret;
+const key         = config.key;
+let server        = require('http').createServer(app);
 
 // Require routes
 let articleRoutes = require('./routes/articleRoutes');

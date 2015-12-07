@@ -34,6 +34,9 @@ $(function() {
         });
       }
     });
+    $.get("http://localhost:3000/article", function(data){
+      console.log(data);
+    })
   });
 
   $('#article-button-add').on('click', function(e){
@@ -60,7 +63,7 @@ var articlePreview = function(data) {
     if (data.description !== null) {
       result.append('<h4>' + data.description + '</h4>');
     }
-    if (data.images[0].url !== null) {
+    if (data.image[0].url !== null) {
       result.append('<img src="' + data.images[0].url + '">');
     }
     result.append('<p>' + data.provider_name + '</p>');
