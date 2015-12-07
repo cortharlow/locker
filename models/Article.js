@@ -11,7 +11,8 @@ let article = new mongoose.Schema({
   title: {type: String, required: true},
   description: {type: String, required: true},
   provider: String,
-  image: String
+  image: String,
+  created_at: {type: Date, default: Date.now, required: true}
 });
 
 module.exports = mongoose.model('Article', article);
