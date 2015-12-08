@@ -8,6 +8,10 @@ angular
         url:"/",
         templateUrl: "home.html"
       })
+      .state('detail', {
+        url:"/yourlocker",
+        templateUrl: "detail.html"
+      })
 
     $urlRouterProvider.otherwise("/");
   }

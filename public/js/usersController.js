@@ -12,6 +12,10 @@ function UsersController($http){
   self.getUsers = getUsers;
   self.loginUser = loginUser;
   self.getUser = {};
+  self.updateUser = self.updateUser;
+  self.editUser = {};
+  self.deleteUser = deleteUser;
+  self.logoutUser = logoutUser;
 
   let token;
   let currentUser;
@@ -22,7 +26,7 @@ function UsersController($http){
       .then(function(response){
         self.all = response.data.users;
       });
-    }
+  }
 
   function addUser(){
     $http
@@ -38,6 +42,14 @@ function UsersController($http){
       });
   }
 
+  function updateUser(){
+    $http
+      .put('http://localhost:3000/user', self.editUser)
+      .then(function(response){
+        currentUser = response.data.currentUser._id;
+      });
+  }
+
   function loginUser(){
     $http
       .post('http://localhost:3000/user/auth', self.getUser)
@@ -45,11 +57,27 @@ function UsersController($http){
         if(response.data.token){
           token = response.data.token;
           currentUser = response.data.user;
-          alert(token + ' : ' + currentUser);
           $.ajaxSetup({
             headers: {'x-access': token}
           });
         }
       });
+  }
+
+  function deleteUser() {
+    .delete('http://localhost:3000/user')
+    .then(function(response){
+      logoutUser();
+    });
+  }
+
+  function logoutUser() {
+    .get('http://localhost:3000/user/logout')
+    .then(function(response){
+      token = response.data.token;
+      $.ajaxSetup({
+        headers: {'x-access': token}
+      });
+    });
   }
 }
