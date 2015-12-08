@@ -12,7 +12,7 @@ function create(req, res){
       res.status(401).send(err);
       console.log(newUser);
     } else {
-      res.status(200).send({token: jwt.sign(newUser, secret), currentUser: newUser})
+      res.status(200).send({token: jwt.sign(newUser, secret), currentUser: newUser});
     }
   })
 }

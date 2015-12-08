@@ -1,15 +1,15 @@
 'use strict';
-let express     = require('express');
-let router      = express.Router();
-let user        = require('../controllers/users');
-let article     = require('../controllers/articles');
-let expressJWT  = require('express-jwt');
+let express         = require('express');
+let router          = express.Router();
+let bodyParser      = require('body-parser');
+let methodOverride  = require('method-override');
+let article         = require('../controllers/articles');
 
-router.route('/')
+router.route('/article')
   .get(article.get)
   .delete(article.destroy);
 
-router.route('/:url')
+router.route('/article/:url')
   .post(article.create);
 
 module.exports = router;

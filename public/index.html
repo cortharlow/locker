@@ -8,7 +8,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/usersController.js"></script>
   </head>
+
+  <body ng-app="Locker">
+    <div ng-controller="UsersController as users" ui-view></div>
+  </body>
+</html>
+
+  <!--
   <body>
     <div class="nav-bar">
       <div class="nav-title">
@@ -53,4 +61,4 @@
       </div>
     </div>
   </body>
-</html>
+</html> -->

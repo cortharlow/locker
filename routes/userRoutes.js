@@ -1,12 +1,14 @@
 'use strict';
 let express = require('express');
 let router = express.Router();
+let bodyParser      = require('body-parser');
+let methodOverride  = require('method-override');
 let user = require('../controllers/users');
 let expressJWT = require('express-jwt');
 let config = require('../config');
 let secret = config.secret;
 
-router.route('/')
+router.route('/user')
   .all(expressJWT({
     secret: secret,
     userProperty: 'auth'
@@ -15,10 +17,10 @@ router.route('/')
   .put(user.update)
   .delete(user.destroy);
 
-router.route('/signup')
+router.route('/user/signup')
   .post(user.create);
 
-router.route('/auth')
+router.route('/user/auth')
   .post(user.auth);
 
   // Verify protected routes
@@ -44,7 +46,7 @@ router.route('/auth')
     }
   });
 
-router.route('/logout')
+router.route('/user/logout')
   .get(user.logout);
 
 module.exports = router;
