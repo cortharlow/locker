@@ -9,7 +9,7 @@ router.route('/article')
   .get(article.get)
   .delete(article.destroy);
 
-router.route('/article/api')
+router.route('/article/:user')
   .post(article.create);
 
 module.exports = router;

@@ -1,8 +1,10 @@
+'user strict';
+var token;
+var currentUser;
+
 angular
   .module('Locker', ['ui.router'])
-  .config(MainRouter);
-
-  function MainRouter($stateProvider, $urlRouterProvider) {
+  .config(function MainRouter($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
         url: "/",
@@ -17,6 +19,115 @@ angular
           }
         }
       })
-
     $urlRouterProvider.otherwise("/");
+  })
+
+  //TESTING
+
+  .controller('UsersController', function UsersController($http){
+    var self = this;
+    self.all = [];
+    self.addUser = addUser;
+    self.newUser = {};
+    self.getUsers = getUsers;
+    self.loginUser = loginUser;
+    self.getUser = {};
+    self.updateUser = self.updateUser;
+    self.editUser = {};
+    self.deleteUser = deleteUser;
+    self.logoutUser = logoutUser;
+
+    function getUsers(){
+      $http
+        .get('http://localhost:3000/user')
+        .then(function(response){
+          self.all = response.data.users;
+        });
+    }
+
+    function addUser(){
+      $http
+        .post('http://localhost:3000/user/signup', self.newUser)
+        .then(function(response){
+          if(response.data.token){
+            token = response.data.token;
+            currentUser = response.data.currentUser._id;
+            $.ajaxSetup({
+              headers: {'x-access': token}
+            });
+          }
+        });
+    }
+
+    function updateUser(){
+      $http
+        .put('http://localhost:3000/user', self.editUser)
+        .then(function(response){
+          currentUser = response.data.currentUser._id;
+        });
+    }
+
+    function loginUser(){
+      $http
+        .post('http://localhost:3000/user/auth', self.getUser)
+        .then(function(response){
+          if(response.data.token){
+            console.log(response.data.token);
+            token = response.data.token;
+            currentUser = response.data.user;
+            console.log(token + ' AND ' + currentUser);
+            $.ajaxSetup({
+              headers: {'x-access': token}
+            });
+          }
+        });
+    }
+
+    function deleteUser() {
+      $http
+        .delete('http://localhost:3000/user')
+        .then(function(response){
+          logoutUser();
+        });
+    }
+
+    function logoutUser() {
+      $http
+        .get('http://localhost:3000/user/logout')
+        .then(function(response){
+          token = response.data.token;
+          $.ajaxSetup({
+            headers: {'x-access': token}
+          });
+        });
+    }
+  })
+
+  .controller('ArticlesController', ArticlesController);
+
+  ArticlesController.$inject = ['$http'];
+
+  function ArticlesController($http){
+    var self = this;
+    self.all = [];
+    self.addArticle = addArticle;
+    self.newArticle = {};
+    self.getArticles = getArticles;
+
+    function getArticles(){
+      $http
+        .get('http://localhost:3000/article')
+        .then(function(response){
+          self.all = response.data.articles;
+        });
+    }
+
+    function addArticle(){
+      $http
+        .post('http://localhost:3000/article/' + currentUser, self.newArticle)
+        .then(function(response){
+          console.log(response.data);
+        });
+      self.newArticle = {};
+    }
   }
