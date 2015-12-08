@@ -10,7 +10,6 @@ function create(req, res){
   newUser.save((err) => {
     if (err){
       res.status(401).send(err);
-      console.log(newUser);
     } else {
       res.status(200).send({token: jwt.sign(newUser, secret), currentUser: newUser});
     }
