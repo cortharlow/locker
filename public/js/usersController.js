@@ -65,19 +65,21 @@ function UsersController($http){
   }
 
   function deleteUser() {
-    .delete('http://localhost:3000/user')
-    .then(function(response){
-      logoutUser();
-    });
+    $http
+      .delete('http://localhost:3000/user')
+      .then(function(response){
+        logoutUser();
+      });
   }
 
   function logoutUser() {
-    .get('http://localhost:3000/user/logout')
-    .then(function(response){
-      token = response.data.token;
-      $.ajaxSetup({
-        headers: {'x-access': token}
+    $http
+      .get('http://localhost:3000/user/logout')
+      .then(function(response){
+        token = response.data.token;
+        $.ajaxSetup({
+          headers: {'x-access': token}
+        });
       });
-    });
   }
 }
