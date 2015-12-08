@@ -4,13 +4,18 @@ angular
 
   function MainRouter($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('splash', {
-        url:"/",
-        templateUrl: "home.html"
-      })
-      .state('detail', {
-        url:"/yourlocker",
-        templateUrl: "detail.html"
+      .state('home', {
+        url: "/",
+        views: {
+          "": {
+            templateUrl: "_home-signup-login.html",
+            controller: "UsersController as users"
+          },
+          "articleTest@home": {
+            templateUrl: "_add-article.html",
+            controller: "ArticlesController as articles"
+          }
+        }
       })
 
     $urlRouterProvider.otherwise("/");

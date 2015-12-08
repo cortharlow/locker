@@ -57,6 +57,7 @@ function UsersController($http){
         if(response.data.token){
           token = response.data.token;
           currentUser = response.data.user;
+          console.log(token + ' AND ' + currentUser);
           $.ajaxSetup({
             headers: {'x-access': token}
           });

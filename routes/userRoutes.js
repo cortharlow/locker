@@ -23,28 +23,27 @@ router.route('/user/signup')
 router.route('/user/auth')
   .post(user.auth);
 
-  // Verify protected routes
-  router.use(function(req, res, next) {
-    console.log('Is this being hit?');
-    var token = req.body.token || req.query.token || req.headers['x-access'];
-    console.log(token);
-    // Decode token
-    if(token) {
-      jst.verify(token, secret, function(err, decoded) {
-        if(err) {
-          return res.json({success: false, message: 'Token Authentication Failure'});
-        } else {
-          req.decoded = decoded;
-          next();
-        }
-      });
-    } else {
-      return res.status(403).send({
-        success: false,
-        message: 'Missing Token'
-      })
-    }
-  });
+// Verify protected routes
+router.use(function(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access'];
+  console.log(token);
+  // Decode token
+  if(token) {
+    jst.verify(token, secret, function(err, decoded) {
+      if(err) {
+        return res.json({success: false, message: 'Token Authentication Failure'});
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'Missing Token'
+    })
+  }
+});
 
 router.route('/user/logout')
   .get(user.logout);

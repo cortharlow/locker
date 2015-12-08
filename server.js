@@ -17,8 +17,8 @@ let articleRoutes = require('./routes/articleRoutes');
 let userRoutes = require('./routes/userRoutes');
 
 // Add Angular and Underscore
-// app.use('/scripts', express.static(__dirname + '/node_modules/angular'))
-// app.use('/scripts', express.static(__dirname + '/node_modules/underscore'))
+app.use('/scripts', express.static(__dirname + '/node_modules/angular'))
+app.use('/scripts', express.static(__dirname + '/node_modules/underscore'))
 
 // Set up app and body parser
 app.use(logger('dev'));

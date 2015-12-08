@@ -5,7 +5,8 @@ let Article       = require('../models/Article');
 let config        = require('../config');
 
 function create(req, res){
-  let apiUrl = 'http://api.embed.ly/1/extract?key=' + config.key + '&url=' + req.params.url;
+  let encodedUrl = encodeURIComponent(req.body.url);
+  let apiUrl = 'http://api.embed.ly/1/extract?key=' + config.key + '&url=' + encodedUrl;
   let user = req.body.user;
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);
@@ -19,12 +20,13 @@ function create(req, res){
       provider: info.provider_name,
       image: info.images[0].url
     });
-    console.log(newArticle);
     newArticle.save((err) => {
       if (err) {
         res.status(400).send(err);
+        console.log(newArticle.title);
       } else {
         res.status(200).send(newArticle);
+        console.log(newArticle.title + "Saved");
       }
     });
   });

@@ -1,0 +1,33 @@
+<!-- _home-signup-login.html -->
+
+<form ng-submit="users.addUser()" id="newUser">
+  <div>
+    <input type="text" id="newUser-name" ng-model="users.newUser.name" placeholder="Name">
+  </div>
+  <div>
+    <input type="text" id="newUser-email" ng-model="users.newUser.email" placeholder="Email">
+  </div>
+  <div>
+    <input type="password" id="newUser-password" ng-model="users.newUser.password" placeholder="Password">
+  </div>
+  <div>
+    <input type="submit" value="Sign Up">
+  </div>
+</form>
+
+
+<form ng-submit="users.loginUser()" id="getUser">
+  <div>
+    <input type="text" id="getUser-email" ng-model="users.getUser.email" placeholder="Email">
+  </div>
+  <div>
+    <input type="password" id="getUser-password" ng-model="users.getUser.password" placeholder="Password">
+  </div>
+  <div>
+    <input type="submit" value="Log In">
+  </div>
+</form>
+
+<div ui-view="articleTest"></div>
+
+</main>

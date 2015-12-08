@@ -9,12 +9,74 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
     <script src="js/app.js"></script>
     <script src="js/usersController.js"></script>
+    <script src="js/articlesController.js"></script>
   </head>
-
   <body ng-app="Locker">
-    <div ng-controller="UsersController as users" ui-view></div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+      <div class="nav-title">
+        <h1>Locker.</h1>
+      </div>
+      <div class="nav-menu">
+        <h1>Menu</h1>
+      </div>
+      <div class="nav-login">
+        <button>Log In</button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="main">
+
+      <div ui-view></div>
+
+    </div>
+
   </body>
 </html>
+
+<!--
+    <section ng-controller="UsersController as users">
+      <form ng-submit="users.addUser()" id="newUser">
+        <div>
+          <input type="text" id="newUser-name" ng-model="users.newUser.name" placeholder="Name">
+        </div>
+        <div>
+          <input type="text" id="newUser-email" ng-model="users.newUser.email" placeholder="Email">
+        </div>
+        <div>
+          <input type="password" id="newUser-password" ng-model="users.newUser.password" placeholder="Password">
+        </div>
+        <div>
+          <input type="submit" value="Sign Up">
+        </div>
+      </form>
+
+
+      <form ng-submit="users.loginUser()" id="getUser">
+        <div>
+          <input type="text" id="getUser-email" ng-model="users.getUser.email" placeholder="Email">
+        </div>
+        <div>
+          <input type="password" id="getUser-password" ng-model="users.getUser.password" placeholder="Password">
+        </div>
+        <div>
+          <input type="submit" value="Log In">
+        </div>
+      </form>
+    </section>
+    <section ng-controller="ArticlesController as articles">
+      <form ng-submit="articles.addArticle()">
+        <div>
+          <input type="text" id="newArticle-url" ng-model="articles.newArticle.url" placeholder="Enter a URL">
+        </div>
+        <div>
+          <input type="submit" value="Add">
+        </div>
+      </form>
+    </section>
+  </body> -->
 
   <!--
   <body>
