@@ -169,7 +169,6 @@ angular
               self.listArticles.push({
                 "saved": response.data[i].created_at,
                 "title": response.data[i].title,
-                "image": response.data[i].image,
                 "description": response.data[i].description,
                 "provider": response.data[i].provider,
                 "content": response.data[i].content,

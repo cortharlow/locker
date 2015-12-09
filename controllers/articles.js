@@ -17,8 +17,7 @@ function create(req, res){
       title: info.title,
       description: info.description,
       content: info.content,
-      provider: info.provider_name,
-      image: info.images[0].thumbnail_url
+      provider: info.provider_name
     });
     newArticle.save((err) => {
       if (err) {
@@ -36,7 +35,6 @@ function get(req, res) {
   let user = req.params.user;
   Article.find({_userId: user}, (err, articles) => {
     res.send(articles);
-    console.log(articles);
   });
 }
 

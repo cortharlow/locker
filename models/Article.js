@@ -12,7 +12,6 @@ let article = new mongoose.Schema({
   description: {type: String, required: true},
   content: {type: String, required: true},
   provider: String,
-  image: String,
   created_at: {type: Date, default: Date.now, required: true}
 });
 
