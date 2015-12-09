@@ -10,11 +10,12 @@
 
 <div ng-init="articles.getArticles()">
 <div class="articles-container">
-  <div class="article" ng-repeat="article in articles.listArticles"><a href="{{article.url}}">
+  <div class="article" ng-repeat="article in articles.listArticles"><a target="_blank" href="{{article.url}}">
     <h1>{{article.title}}</h1>
       <img src="{{article.image}}">
       <h4>{{article.description}}</h4>
         <p>{{article.provider}}</p>
+        <p>{{article.date}}</p>
       </a>
   </div>
 </div>

@@ -59,7 +59,7 @@ function auth(req, res){
         } else {
           var token = jwt.sign(user, secret);
           console.log(token);
-          res.send({
+          res.json({
             success: true,
             message: "Authentication Success",
             token: token,

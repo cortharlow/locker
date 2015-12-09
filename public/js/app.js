@@ -120,9 +120,52 @@ angular
       $http
         .get('http://localhost:3000/article/' + currentUser)
         .then(function(response){
-          console.log(response.data);
           if (response.data.length > 0) {
             for(var i = 0; i < response.data.length; i++) {
+              var date = response.data[i].created_at;
+              date = date.toString();
+              date = date.slice(0,10).split('-');
+              for (var j = 0; j < 13; j++) {
+                if (date[1] === j.toString()) {
+                  if (j = 1) {
+                    date[1] = "January";
+                  }
+                  if (j = 2) {
+                    date[1] = "February";
+                  }
+                  if (j = 3) {
+                    date[1] = "March";
+                  }
+                  if (j = 4) {
+                    date[1] = "April";
+                  }
+                  if (j = 5) {
+                    date[1] = "May";
+                  }
+                  if (j = 6) {
+                    date[1] = "June";
+                  }
+                  if (j = 7) {
+                    date[1] = "July";
+                  }
+                  if (j = 8) {
+                    date[1] = "August";
+                  }
+                  if (j = 9) {
+                    date[1] = "September";
+                  }
+                  if (j = 10) {
+                    date[1] = "October";
+                  }
+                  if (j = 11) {
+                    date[1] = "November";
+                  }
+                  if (j = 12) {
+                    date[1] = "December";
+                  }
+                }
+              }
+              date = date[2] + ' ' + date[1] + ' ' + date[0];
               self.listArticles.push({
                 "saved": response.data[i].created_at,
                 "title": response.data[i].title,
@@ -130,7 +173,8 @@ angular
                 "description": response.data[i].description,
                 "provider": response.data[i].provider,
                 "content": response.data[i].content,
-                "url": response.data[i].url
+                "url": response.data[i].url,
+                "date": date
               });
             }
           }
