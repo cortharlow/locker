@@ -1,0 +1,16 @@
+<div signup-container>
+  <form ng-submit="users.addUser()" id="newUser">
+    <div>
+      <input type="text" class="signup-input" ng-model="users.newUser.name" placeholder="Name">
+    </div>
+    <div>
+      <input type="text" class="signup-input" ng-model="users.newUser.email" placeholder="Email">
+    </div>
+    <div>
+      <input type="password" class="signup-input" ng-model="users.newUser.password" placeholder="Password">
+    </div>
+    <div>
+      <input class="signup-input-button" type="submit" value="Sign Up">
+    </div>
+  </form>
+</div>

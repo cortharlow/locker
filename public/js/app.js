@@ -8,7 +8,16 @@ angular
     $stateProvider
       .state('home', {
         url: "/",
-        templateUrl: "_home-signup-login.html",
+        templateUrl: "_home.html"
+      })
+      .state('home.signup', {
+        url: "/signup",
+        templateUrl: "_home-signup.html",
+        controller: "UsersController as users"
+      })
+      .state('home.login', {
+        url: "/login",
+        templateUrl: "_home-login.html",
         controller: "UsersController as users"
       })
       .state('locker', {

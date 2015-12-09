@@ -1,0 +1,15 @@
+<div login-container>
+  <form ng-submit="users.loginUser()" id="getUser" >
+    <div>
+      <input type="text" class="signup-input" ng-model="users.getUser.email" placeholder="Email">
+    </div>
+    <div>
+      <input type="password" class="signup-input" ng-model="users.getUser.password" placeholder="Password">
+    </div>
+    <div>
+      <input class="signup-input-button" type="submit" value="Log In">
+    </div>
+  </form>
+</div>
+
+<input type="submit" ng-submit="articles.getArticles()" value="Get Articles" ui-sref="locker"></input>
