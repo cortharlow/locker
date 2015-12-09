@@ -6,10 +6,10 @@ let methodOverride  = require('method-override');
 let article         = require('../controllers/articles');
 
 router.route('/article')
-  .get(article.get)
   .delete(article.destroy);
 
 router.route('/article/:user')
+  .get(article.get)
   .post(article.create);
 
 module.exports = router;

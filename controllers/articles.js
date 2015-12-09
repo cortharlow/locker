@@ -9,7 +9,6 @@ function create(req, res){
   let apiUrl = 'http://api.embed.ly/1/extract?key=' + config.key + '&url=' + encodedUrl;
   let user = req.params.user;
   request(apiUrl, (err, response, body) => {
-    console.log(body);
     let info = JSON.parse(body);
     //console.log(info);
     let newArticle = new Article({
@@ -18,8 +17,8 @@ function create(req, res){
       title: info.title,
       description: info.description,
       content: info.content,
-      provider: info.provider_name
-      //image: info.images.thumbnail_url
+      provider: info.provider_name,
+      image: info.images[0].thumbnail_url
     });
     newArticle.save((err) => {
       if (err) {
@@ -34,7 +33,8 @@ function create(req, res){
 }
 
 function get(req, res) {
-  Article.find({}, (err, articles) => {
+  let user = req.params.user;
+  Article.find({_userId: user}, (err, articles) => {
     res.send(articles);
     console.log(articles);
   });

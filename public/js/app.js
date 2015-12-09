@@ -8,17 +8,20 @@ angular
     $stateProvider
       .state('home', {
         url: "/",
+        templateUrl: "_home-signup-login.html",
+        controller: "UsersController as users"
+      })
+      .state('locker', {
+        url: "/locker",
         views: {
           "": {
-            templateUrl: "_home-signup-login.html",
-            controller: "UsersController as users"
-          },
-          "articleTest@home": {
             templateUrl: "_add-article.html",
             controller: "ArticlesController as articles"
           }
-        }
+        },
+        authenticate: true
       })
+
     $urlRouterProvider.otherwise("/");
   })
 
@@ -72,15 +75,14 @@ angular
         .post('http://localhost:3000/user/auth', self.getUser)
         .then(function(response){
           if(response.data.token){
-            console.log(response.data.token);
             token = response.data.token;
             currentUser = response.data.user;
-            console.log(token + ' AND ' + currentUser);
             $.ajaxSetup({
               headers: {'x-access': token}
             });
           }
         });
+      return { user: { "email": self.getUser.email, "id": currentUser }, "accessToken": token }
     }
 
     function deleteUser() {
@@ -109,16 +111,29 @@ angular
 
   function ArticlesController($http){
     var self = this;
-    self.all = [];
+    self.listArticles = [];
     self.addArticle = addArticle;
     self.newArticle = {};
     self.getArticles = getArticles;
 
     function getArticles(){
       $http
-        .get('http://localhost:3000/article')
+        .get('http://localhost:3000/article/' + currentUser)
         .then(function(response){
-          self.all = response.data.articles;
+          console.log(response.data);
+          if (response.data.length > 0) {
+            for(var i = 0; i < response.data.length; i++) {
+              self.listArticles.push({
+                "saved": response.data[i].created_at,
+                "title": response.data[i].title,
+                "image": response.data[i].image,
+                "description": response.data[i].description,
+                "provider": response.data[i].provider,
+                "content": response.data[i].content,
+                "url": response.data[i].url
+              });
+            }
+          }
         });
     }
 

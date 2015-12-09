@@ -52,13 +52,14 @@ function auth(req, res){
     {email: req.body.email}, function(err, user){
       if(err) throw err;
       if(!user) {
-        res.json({success: false, message: "Authentication Failure"})
+        res.send({success: false, message: "Authentication Failure"})
       } else if(user){
         if(user.password != req.body.password){
-          res.json({success: false, message: "Login Failed"})
+          res.send({success: false, message: "Login Failed"})
         } else {
           var token = jwt.sign(user, secret);
-          res.json({
+          console.log(token);
+          res.send({
             success: true,
             message: "Authentication Success",
             token: token,
