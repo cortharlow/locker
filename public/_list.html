@@ -2,7 +2,8 @@
 <div class="articles-container">
   <div class="article" ng-repeat="article in articles.listArticles">
     <div class="article-date">
-      <h4>{{article.date}}</h4>
+      <p>{{article.date}}</p>
+      <p id="remove" class="remove" type="submit" ng-click="articles.deleteArticle(article.id);">Remove</p>
     </div>
     <div class="article-content">
       <a target="_blank" href="{{article.url}}">

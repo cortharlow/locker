@@ -45,7 +45,6 @@ angular
   .controller('UsersController', function UsersController($scope, $state, $http, $window){
 
     if($window.localStorage.token) {
-      console.log("Current user: " + $window.localStorage.user);
       $state.go('locker');
     }
 
@@ -156,6 +155,8 @@ angular
     self.addArticle = addArticle;
     self.newArticle = {};
     self.getArticles = getArticles;
+    self.getArticle = {};
+    self.deleteArticle = deleteArticle;
 
     function getArticles(){
       $http
@@ -208,6 +209,7 @@ angular
               }
               date = date[2] + ' ' + date[1] + ' ' + date[0];
               self.listArticles.push({
+                "id": response.data[i]._id,
                 "saved": response.data[i].created_at,
                 "title": response.data[i].title,
                 "description": response.data[i].description,
@@ -228,5 +230,15 @@ angular
           $window.location.reload();
         });
       self.newArticle = {};
+    }
+
+    function deleteArticle(id){
+      $http({
+        url: 'http://localhost:3000/article/' + id,
+        method: "DELETE"
+      })
+      .then(function(response){
+        $window.location.reload();
+      });
     }
   })

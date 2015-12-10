@@ -5,7 +5,7 @@ let bodyParser      = require('body-parser');
 let methodOverride  = require('method-override');
 let article         = require('../controllers/articles');
 
-router.route('/article')
+router.route('/article/:id')
   .delete(article.destroy);
 
 router.route('/article/:user')

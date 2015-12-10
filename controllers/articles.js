@@ -40,8 +40,10 @@ function get(req, res) {
 }
 
 function destroy(req, res) {
-  let articleParams = req.body.article;
-  Article.findOne({ _id: articleParams.id }, (err, article) => {
+  console.log('HIT');
+  console.log(req.body);
+  let articleId = req.params.id;
+  Article.findOne({ _id: articleId }, (err, article) => {
     if (err) {
       return;
     }
