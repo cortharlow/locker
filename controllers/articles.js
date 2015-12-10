@@ -33,7 +33,8 @@ function create(req, res){
 
 function get(req, res) {
   let user = req.params.user;
-  Article.find({_userId: user}, (err, articles) => {
+  let query = Article.find({_userId: user}).sort({created_at: -1});
+  query.exec((err, articles) => {
     res.send(articles);
   });
 }

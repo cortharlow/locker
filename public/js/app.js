@@ -22,13 +22,8 @@ angular
       })
       .state('locker', {
         url: "/locker",
-        views: {
-          "": {
-            templateUrl: "_add-article.html",
-            controller: "ArticlesController as articles"
-          }
-        },
-        authenticate: true
+        templateUrl: "_add-article.html",
+        controller: "ArticlesController as articles"
       })
 
     $urlRouterProvider.otherwise("/");
@@ -80,18 +75,26 @@ angular
     }
 
     function loginUser(){
-      $http
-        .post('http://localhost:3000/user/auth', self.getUser)
-        .then(function(response){
-          if(response.data.token){
-            token = response.data.token;
-            currentUser = response.data.user;
-            $.ajaxSetup({
-              headers: {'x-access': token}
-            });
-          }
-        });
-      return { user: { "email": self.getUser.email, "id": currentUser }, "accessToken": token }
+      $http({
+        url: 'http://localhost:3000/user/auth',
+        method: "POST",
+        data: self.getUser,
+        params: {token: token}
+      }).then(function(response){
+        token = response.data.token;
+        currentUser = response.data.user;
+      });
+      // $http
+      //   .post('http://localhost:3000/user/auth', self.getUser)
+      //   .then(function(response){
+      //     if(response.data.token){
+      //       token = response.data.token;
+      //       currentUser = response.data.user;
+      //       $.ajaxSetup({
+      //         headers: {'x-access': token}
+      //       });
+      //     }
+      //   });
     }
 
     function deleteUser() {
@@ -137,40 +140,40 @@ angular
               for (var j = 0; j < 13; j++) {
                 if (date[1] === j.toString()) {
                   if (j = 1) {
-                    date[1] = "January";
+                    date[1] = "Jan";
                   }
                   if (j = 2) {
-                    date[1] = "February";
+                    date[1] = "Feb";
                   }
                   if (j = 3) {
-                    date[1] = "March";
+                    date[1] = "Mar";
                   }
                   if (j = 4) {
-                    date[1] = "April";
+                    date[1] = "Apr";
                   }
                   if (j = 5) {
                     date[1] = "May";
                   }
                   if (j = 6) {
-                    date[1] = "June";
+                    date[1] = "Jun";
                   }
                   if (j = 7) {
-                    date[1] = "July";
+                    date[1] = "Jul";
                   }
                   if (j = 8) {
-                    date[1] = "August";
+                    date[1] = "Aug";
                   }
                   if (j = 9) {
-                    date[1] = "September";
+                    date[1] = "Sep";
                   }
                   if (j = 10) {
-                    date[1] = "October";
+                    date[1] = "Oct";
                   }
                   if (j = 11) {
-                    date[1] = "November";
+                    date[1] = "Nov";
                   }
                   if (j = 12) {
-                    date[1] = "December";
+                    date[1] = "Dec";
                   }
                 }
               }

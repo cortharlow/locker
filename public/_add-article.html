@@ -1,21 +1,27 @@
 
 <form ng-submit="articles.addArticle()">
-  <div>
-    <input type="text" id="newArticle-url" ng-model="articles.newArticle.url" placeholder="Enter a URL">
-  </div>
-  <div>
-    <input type="submit" value="Add" ng-click="articles.getArticles()">
+  <div class="article-add">
+    <div class="article-input">
+      <input type="text" id="newArticle-url" ng-model="articles.newArticle.url" placeholder="Enter a URL">
+    </div>
+    <div class="article-submit">
+      <input type="submit" value="Add" ng-click="articles.getArticles()">
+    </div>
   </div>
 </form>
 
-<div ng-init="articles.getArticles()">
+<div ng-init="articles.getArticles()"></div>
 <div class="articles-container">
-  <div class="article" ng-repeat="article in articles.listArticles"><a target="_blank" href="{{article.url}}">
-    <h1>{{article.title}}</h1>
-      <img src="{{article.image}}">
-      <h4>{{article.description}}</h4>
-        <p>{{article.provider}}</p>
-        <p>{{article.date}}</p>
-      </a>
+  <div class="article" ng-repeat="article in articles.listArticles">
+      <div class="article-date">
+        <h4>{{article.date}}</h4>
+      </div>
+      <div class="article-content">
+        <a target="_blank" href="{{article.url}}">
+          <h1>{{article.title}}</h1>
+            <p id="description">{{article.description}}</p>
+            <p id="provider">{{article.provider}}</p>
+        </a>
+      </div>
   </div>
 </div>
