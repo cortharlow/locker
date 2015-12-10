@@ -1,6 +1,4 @@
 'user strict';
-var token;
-var currentUser;
 
 angular
   .module('Locker', ['ui.router'])
@@ -31,16 +29,22 @@ angular
 
   //TESTING
 
-  .controller('UsersController', function UsersController($http){
+  .controller('UsersController', function UsersController($scope, $state, $http, $window){
     var self = this;
     self.all = [];
+
     self.addUser = addUser;
     self.newUser = {};
+
     self.getUsers = getUsers;
+
     self.loginUser = loginUser;
     self.getUser = {};
+    self.message = '';
+
     self.updateUser = self.updateUser;
     self.editUser = {};
+
     self.deleteUser = deleteUser;
     self.logoutUser = logoutUser;
 
@@ -56,45 +60,38 @@ angular
       $http
         .post('http://localhost:3000/user/signup', self.newUser)
         .then(function(response){
-          if(response.data.token){
-            token = response.data.token;
-            currentUser = response.data.currentUser._id;
-            $.ajaxSetup({
-              headers: {'x-access': token}
-            });
+          if (response.data.success) {
+            $window.localStorage.token = response.data.token;
+            $window.localStorage.user = response.data.user._id;
+            self.message = 'Success';
+            $state.go('locker')
           }
-        });
+        })
     }
 
     function updateUser(){
       $http
         .put('http://localhost:3000/user', self.editUser)
-        .then(function(response){
-          currentUser = response.data.currentUser._id;
+        .then(function(data, status, headers, config){
+          $window.localStorage.user = data.user;
         });
     }
 
     function loginUser(){
-      $http({
-        url: 'http://localhost:3000/user/auth',
-        method: "POST",
-        data: self.getUser,
-        params: {token: token}
-      }).then(function(response){
-        token = response.data.token;
-        currentUser = response.data.user;
-      });
-      // $http
-      //   .post('http://localhost:3000/user/auth', self.getUser)
-      //   .then(function(response){
-      //     if(response.data.token){
-      //       token = response.data.token;
-      //       currentUser = response.data.user;
-      //       $.ajaxSetup({
-      //         headers: {'x-access': token}
-      //       });
-      //     }
-      //   });
+      $http
+        .post('http://localhost:3000/user/auth', self.getUser)
+        .then(function(response){
+          if (response.data.success) {
+            $window.localStorage.token = response.data.token;
+            $window.localStorage.user = response.data.user;
+            self.message = 'Success';
+            $state.go('locker');
+          } else {
+            delete $window.localStorage.token;
+            delete $window.localStorage.user;
+            self.message = 'Error';
+          }
+        })
     }
 
     function deleteUser() {
@@ -109,19 +106,36 @@ angular
       $http
         .get('http://localhost:3000/user/logout')
         .then(function(response){
-          token = response.data.token;
-          $.ajaxSetup({
-            headers: {'x-access': token}
-          });
+          delete $window.localStorage.token;
+          delete $window.localStorage.user;
+          $state.go('home');
         });
     }
   })
 
-  .controller('ArticlesController', ArticlesController);
+  .factory('authInterceptor', function ($rootScope, $q, $window) {
+    return {
+      request: function (config) {
+        config.headers = config.headers || {};
+        if ($window.localStorage.token) {
+          config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
+        }
+        return config;
+      },
+      response: function (response) {
+        if (response.status === 401) {
+          // handle the case where the user is not authenticated
+        }
+        return response || $q.when(response);
+      }
+    };
+  })
 
-  ArticlesController.$inject = ['$http'];
+  .config(function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptor');
+  })
 
-  function ArticlesController($http){
+  .controller('ArticlesController', function ArticlesController($rootScope, $http, $window){
     var self = this;
     self.listArticles = [];
     self.addArticle = addArticle;
@@ -129,8 +143,9 @@ angular
     self.getArticles = getArticles;
 
     function getArticles(){
+      console.log($window.localStorage.user)
       $http
-        .get('http://localhost:3000/article/' + currentUser)
+        .get('http://localhost:3000/article/' + $window.localStorage.user)
         .then(function(response){
           if (response.data.length > 0) {
             for(var i = 0; i < response.data.length; i++) {
@@ -200,4 +215,4 @@ angular
         });
       self.newArticle = {};
     }
-  }
+  })

@@ -11,7 +11,10 @@ function create(req, res){
     if (err){
       res.status(401).send(err);
     } else {
-      res.status(200).send({token: jwt.sign(newUser, secret), currentUser: newUser});
+      res.status(200).send({
+        success: true,
+        token: jwt.sign(newUser, secret),
+        user: newUser});
     }
   })
 }
