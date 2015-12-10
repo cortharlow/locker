@@ -1,16 +1,21 @@
-<div signup-container>
-  <form ng-submit="users.addUser()" id="newUser">
-    <div>
-      <input type="text" class="signup-input" ng-model="users.newUser.name" placeholder="Name">
+<form class="form-up" ng-submit="users.addUser()" id="newUser">
+  <div class="input-container">
+    <div class="input-margin">
+      <input type="text" class="signup-input" ng-model="users.newUser.name" placeholder="Name.">
     </div>
-    <div>
-      <input type="text" class="signup-input" ng-model="users.newUser.email" placeholder="Email">
+    <div class="input-margin">
+      <input type="text" class="signup-input" ng-model="users.newUser.email" placeholder="Email.">
     </div>
-    <div>
-      <input type="password" class="signup-input" ng-model="users.newUser.password" placeholder="Password">
+    <div class="input-margin">
+      <input type="password" class="signup-input" ng-model="users.newUser.password" placeholder="Password.">
     </div>
-    <div>
-      <input class="signup-input-button" type="submit" value="Sign Up">
+  </div>
+  <div class="input-button-container-signup">
+    <button class="input-button" type="submit">
+      <h2>Sign Up</h2>
+    </button>
+    <div class="description-button" ui-sref="home.login">
+      <h2>Login</h2>
     </div>
-  </form>
-</div>
+  </div>
+</form>

@@ -20,8 +20,16 @@ angular
       })
       .state('locker', {
         url: "/locker",
-        templateUrl: "_add-article.html",
-        controller: "ArticlesController as articles"
+        views: {
+          "": {
+            templateUrl: "_add-article.html",
+            controller: "ArticlesController as articles"
+          },
+          "list@locker": {
+            templateUrl: "_list.html",
+            controller: "ArticlesController as articles"
+          }
+        }
       })
 
     $urlRouterProvider.otherwise("/");
@@ -64,7 +72,7 @@ angular
             $window.localStorage.token = response.data.token;
             $window.localStorage.user = response.data.user._id;
             self.message = 'Success';
-            $state.go('locker')
+            $state.go('locker');
           }
         })
     }
@@ -135,7 +143,7 @@ angular
     $httpProvider.interceptors.push('authInterceptor');
   })
 
-  .controller('ArticlesController', function ArticlesController($rootScope, $http, $window){
+  .controller('ArticlesController', function ArticlesController($rootScope, $state, $http, $window){
     var self = this;
     self.listArticles = [];
     self.addArticle = addArticle;
@@ -209,9 +217,8 @@ angular
 
     function addArticle(){
       $http
-        .post('http://localhost:3000/article/' + currentUser, self.newArticle)
+        .post('http://localhost:3000/article/' + $window.localStorage.user, self.newArticle)
         .then(function(response){
-          console.log(response.data);
         });
       self.newArticle = {};
     }
