@@ -74,16 +74,10 @@ function auth(req, res){
   );
 }
 
-function logout(req, res) {
-  console.log(req.headers.token);
-  res.status(200).send();
-}
-
 module.exports = {
   create: create,
   get: get,
   update: update,
   destroy: destroy,
-  auth: auth,
-  logout: logout
+  auth: auth
 }

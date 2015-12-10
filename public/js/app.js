@@ -6,7 +6,8 @@ angular
     $stateProvider
       .state('home', {
         url: "/",
-        templateUrl: "_home.html"
+        templateUrl: "_home.html",
+        controller: "UsersController"
       })
       .state('home.signup', {
         url: "/signup",
@@ -28,6 +29,10 @@ angular
           "list@locker": {
             templateUrl: "_list.html",
             controller: "ArticlesController as articles"
+          },
+          "footer@locker": {
+            templateUrl: "_footer.html",
+            controller: "UsersController as users"
           }
         }
       })
@@ -38,6 +43,12 @@ angular
   //TESTING
 
   .controller('UsersController', function UsersController($scope, $state, $http, $window){
+
+    if($window.localStorage.token) {
+      console.log("Current user: " + $window.localStorage.user);
+      $state.go('locker');
+    }
+
     var self = this;
     self.all = [];
 
@@ -105,19 +116,15 @@ angular
     function deleteUser() {
       $http
         .delete('http://localhost:3000/user')
-        .then(function(response){
+        .then(function(){
           logoutUser();
         });
     }
 
     function logoutUser() {
-      $http
-        .get('http://localhost:3000/user/logout')
-        .then(function(response){
-          delete $window.localStorage.token;
-          delete $window.localStorage.user;
-          $state.go('home');
-        });
+      delete $window.localStorage.token;
+      delete $window.localStorage.user;
+      $state.go('home');
     }
   })
 
@@ -151,7 +158,6 @@ angular
     self.getArticles = getArticles;
 
     function getArticles(){
-      console.log($window.localStorage.user)
       $http
         .get('http://localhost:3000/article/' + $window.localStorage.user)
         .then(function(response){
@@ -219,6 +225,7 @@ angular
       $http
         .post('http://localhost:3000/article/' + $window.localStorage.user, self.newArticle)
         .then(function(response){
+          $window.location.reload();
         });
       self.newArticle = {};
     }

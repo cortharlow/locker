@@ -45,7 +45,4 @@ router.use(function(req, res, next) {
   }
 });
 
-router.route('/user/logout')
-  .get(user.logout);
-
 module.exports = router;
