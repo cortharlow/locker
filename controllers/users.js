@@ -56,23 +56,24 @@ function auth(req, res){
       if(err) throw err;
       if(!user) {
         res.send({success: false, message: "Authentication Failure"})
-      } else if(user){
-        if(user.password != req.body.password){
-          res.send({success: false, message: "Login Failed"})
-        } else {
-          var token = jwt.sign(user, secret);
-          console.log(token);
-          res.json({
-            success: true,
-            message: "Authentication Success",
-            token: token,
-            user: user._id
-          });
-        }
+      } else {
+        user.authenticate(req.body.password, function(err, isMatch) {
+          if (err) {
+            res.send({success: false, message: "Login Failed"})
+          } else {
+            var token = jwt.sign(user, secret);
+            res.json({
+              success: true,
+              message: "Authentication Success",
+              token: token,
+              user: user._id
+            });
+          }
+        });
       }
-    }
-  );
-}
+    });
+  }
+
 
 module.exports = {
   create: create,
