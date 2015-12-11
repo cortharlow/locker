@@ -227,7 +227,13 @@ angular
       console.log(self.newArticle);
       console.log($window.localStorage.user);
       $http
-        .post('https://getlocker.herokuapp.com/' + $window.localStorage.user, self.newArticle)
+        ({
+          url: "https://getlocker.herokuapp.com/" + $window.localStorage.user,
+          method: "POST",
+          data: self.newArticle,
+          params: {"user": $window.localStorage.user}
+        })
+        // .post('https://getlocker.herokuapp.com/' + $window.localStorage.user, self.newArticle)
         .then(function(response){
           $window.location.reload();
         });
