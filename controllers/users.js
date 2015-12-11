@@ -2,7 +2,7 @@
 let User = require('../models/User');
 let jwt = require('jsonwebtoken');
 let config = require('../config');
-const secret = config.secret;
+const secret = config.SECRET;
 
 function create(req, res){
   let newUser = new User(req.body);
@@ -60,6 +60,7 @@ function auth(req, res){
         if(user.password != req.body.password){
           res.send({success: false, message: "Login Failed"})
         } else {
+          console.log(secret);
           var token = jwt.sign(user, secret);
           console.log(token);
           res.json({

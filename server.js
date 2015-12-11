@@ -8,8 +8,8 @@ const bodyParser  = require('body-parser');
 const jwt         = require('jsonwebtoken');
 let config        = require('./config');
 const app         = express();
-const secret      = config.secret;
-const key         = config.key;
+const secret      = config.SECRET;
+const key         = config.KEY;
 let server        = require('http').createServer(app);
 
 // Require routes

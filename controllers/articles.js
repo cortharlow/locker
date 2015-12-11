@@ -3,10 +3,11 @@ const request     = require('request');
 const bodyParser  = require('body-parser');
 let Article       = require('../models/Article');
 let config        = require('../config');
+const key = config.KEY;
 
 function create(req, res){
   let encodedUrl = encodeURIComponent(req.body.url);
-  let apiUrl = 'http://api.embed.ly/1/extract?key=' + config.key + '&url=' + encodedUrl;
+  let apiUrl = 'http://api.embed.ly/1/extract?key=' + key + '&url=' + encodedUrl;
   console.log(apiUrl);
   let user = req.params.user;
   request(apiUrl, (err, response, body) => {
