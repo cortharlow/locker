@@ -6,7 +6,7 @@ let methodOverride  = require('method-override');
 let user = require('../controllers/users');
 let expressJWT = require('express-jwt');
 let config = require('../config');
-let secret = config.secret;
+const secret = config.secret;
 
 router.route('/user')
   .all(expressJWT({
