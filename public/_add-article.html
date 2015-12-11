@@ -1,0 +1,12 @@
+<div class="add-article-container">
+  <form ng-submit="articles.addArticle()">
+    <div class="add-article">
+      <input type="text" class="article-input" id="newArticle-url" ng-model="articles.newArticle.url" placeholder="Copy and paste a link.">
+      <button class="article-button" type="submit" ng-click="articles.getArticles()">
+        <h2>+</h2>
+      </button>
+    </div>
+  </form>
+</div>
+
+<div ui-view="list"></div>

@@ -1,0 +1,19 @@
+<div class="description-container">
+  <div class="description-text" ng-class="{'hidden': hideDescription}">
+    <h2>Find cool stuff online.</h2>
+  </div>
+  <div class="description-text" ng-class="{'hidden': hideDescription}">
+    <h2>Store it in your locker.</h2>
+  </div>
+</div>
+
+<div class="description-button-container" ng-class="{'hidden': hideDescription}">
+  <div class="description-button" ng-click="hideDescription = ! hideDescription" ui-sref="home.signup">
+    <h2>Sign Up</h2>
+  </div>
+  <div class="description-button" ng-click="hideDescription = ! hideDescription" ui-sref="home.login">
+    <h2>Login</h2>
+  </div>
+</div>
+
+<div class="signup-login" ui-view></div>

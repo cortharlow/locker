@@ -1,0 +1,17 @@
+<div ng-init="articles.getArticles()"></div>
+<div class="articles-container">
+  <div class="article" ng-repeat="article in articles.listArticles">
+    <div class="article-date">
+      <p>{{article.date}}</p>
+      <p id="remove" class="remove" type="submit" ng-click="articles.deleteArticle(article.id);">Remove</p>
+    </div>
+    <div class="article-content">
+      <a target="_blank" href="{{article.url}}">
+        <h1>{{article.title}}</h1>
+          <p id="description">{{article.description}}</p>
+          <p id="provider">{{article.provider}}</p>
+      </a>
+    </div>
+  </div>
+</div>
+<div ui-view="footer"></div>

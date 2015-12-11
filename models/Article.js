@@ -10,8 +10,9 @@ let article = new mongoose.Schema({
   url: {type: String, required: true},
   title: {type: String, required: true},
   description: {type: String, required: true},
+  content: String,
   provider: String,
-  image: String
+  created_at: {type: Date, default: Date.now, required: true}
 });
 
 module.exports = mongoose.model('Article', article);
