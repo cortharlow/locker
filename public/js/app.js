@@ -226,7 +226,7 @@ angular
     function addArticle(){
       console.log(self.newArticle);
       $http
-        .post('https://getlocker.herokuapp.com' + $window.localStorage.user, self.newArticle)
+        .post('https://getlocker.herokuapp.com/' + $window.localStorage.user, self.newArticle)
         .then(function(response){
           $window.location.reload();
         });
@@ -235,7 +235,7 @@ angular
 
     function deleteArticle(id){
       $http({
-        url: 'https://getlocker.herokuapp.com' + id,
+        url: 'https://getlocker.herokuapp.com/' + id,
         method: "DELETE"
       })
       .then(function(response){
