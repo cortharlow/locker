@@ -224,6 +224,7 @@ angular
     }
 
     function addArticle(){
+      console.log(self.newArticle);
       $http
         .post('http://localhost:3000/article/' + $window.localStorage.user, self.newArticle)
         .then(function(response){
@@ -239,6 +240,6 @@ angular
       })
       .then(function(response){
         $window.location.reload();
-      });
+      })
     }
   })

@@ -7,10 +7,10 @@ let config        = require('../config');
 function create(req, res){
   let encodedUrl = encodeURIComponent(req.body.url);
   let apiUrl = 'http://api.embed.ly/1/extract?key=' + config.key + '&url=' + encodedUrl;
+  console.log(apiUrl);
   let user = req.params.user;
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);
-    //console.log(info);
     let newArticle = new Article({
       _userId: user,
       url: info.url,
@@ -22,7 +22,7 @@ function create(req, res){
     newArticle.save((err) => {
       if (err) {
         res.status(400).send(err);
-        console.log(newArticle.title);
+        console.log(newArticle.title + 'Not Saved');
       } else {
         res.status(200).send(newArticle);
         console.log(newArticle.title + "Saved");
