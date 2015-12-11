@@ -8,10 +8,8 @@ let article         = require('../controllers/articles');
 router.route('/article/:id')
   .delete(article.destroy);
 
-router.route('/article/:user')
-  .get(article.get)
-
 router.route('/article/add')
+  .get(article.get)
   .post(article.create);
 
 module.exports = router;

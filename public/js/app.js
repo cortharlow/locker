@@ -160,7 +160,12 @@ angular
 
     function getArticles(){
       $http
-        .get('https://getlocker.herokuapp.com/article/' + $window.localStorage.user)
+        ({
+          url: "https://getlocker.herokuapp.com/add",
+          method: "GET",
+          params: {"user": $window.localStorage.user}
+        })
+        .get('https://getlocker.herokuapp.com/article/add')
         .then(function(response){
           if (response.data.length > 0) {
             for(var i = 0; i < response.data.length; i++) {
@@ -231,7 +236,6 @@ angular
           method: "POST",
           data: {"url": self.newArticle.url, "user": $window.localStorage.user}
         })
-        // .post('https://getlocker.herokuapp.com/' + $window.localStorage.user, self.newArticle)
         .then(function(response){
           $window.location.reload();
         });
