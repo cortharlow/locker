@@ -34,7 +34,7 @@ let mongoose = require('mongoose');
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/locker';
 mongoose.connect(mongoUri);
 
-server.listen(process.env || 3000, function() {
+server.listen(process.env.PORT || 5000, function() {
   let host = server.address().address;
   let port = server.address().port;
   console.log('express running', host, port);

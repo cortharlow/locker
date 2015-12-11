@@ -68,7 +68,7 @@ angular
 
     function getUsers(){
       $http
-        .get('http://localhost:3000/user')
+        .get('http://localhost:5000/user')
         .then(function(response){
           self.all = response.data.users;
         });
@@ -76,7 +76,7 @@ angular
 
     function addUser(){
       $http
-        .post('http://localhost:3000/user/signup', self.newUser)
+        .post('http://localhost:5000/user/signup', self.newUser)
         .then(function(response){
           if (response.data.success) {
             $window.localStorage.token = response.data.token;
@@ -89,7 +89,7 @@ angular
 
     function updateUser(){
       $http
-        .put('http://localhost:3000/user', self.editUser)
+        .put('http://localhost:5000/user', self.editUser)
         .then(function(data, status, headers, config){
           $window.localStorage.user = data.user;
         });
@@ -97,7 +97,7 @@ angular
 
     function loginUser(){
       $http
-        .post('http://localhost:3000/user/auth', self.getUser)
+        .post('http://localhost:5000/user/auth', self.getUser)
         .then(function(response){
           if (response.data.success) {
             $window.localStorage.token = response.data.token;
@@ -114,7 +114,7 @@ angular
 
     function deleteUser() {
       $http
-        .delete('http://localhost:3000/user')
+        .delete('http://localhost:5000/user')
         .then(function(){
           logoutUser();
         });
@@ -160,7 +160,7 @@ angular
 
     function getArticles(){
       $http
-        .get('http://localhost:3000/article/' + $window.localStorage.user)
+        .get('http://localhost:5000/article/' + $window.localStorage.user)
         .then(function(response){
           if (response.data.length > 0) {
             for(var i = 0; i < response.data.length; i++) {
@@ -226,7 +226,7 @@ angular
     function addArticle(){
       console.log(self.newArticle);
       $http
-        .post('http://localhost:3000/article/' + $window.localStorage.user, self.newArticle)
+        .post('http://localhost:5000/article/' + $window.localStorage.user, self.newArticle)
         .then(function(response){
           $window.location.reload();
         });
@@ -235,7 +235,7 @@ angular
 
     function deleteArticle(id){
       $http({
-        url: 'http://localhost:3000/article/' + id,
+        url: 'http://localhost:5000/article/' + id,
         method: "DELETE"
       })
       .then(function(response){
