@@ -1,5 +1,3 @@
-'user strict';
-
 angular
   .module('Locker', ['ui.router'])
   .config(function MainRouter($stateProvider, $urlRouterProvider) {
@@ -230,6 +228,7 @@ angular
 
     function addArticle(){
       console.log(self.newArticle.url);
+      console.log($window.localStorage.user);
       $http
         ({
           url: "https://getlocker.herokuapp.com/add",
