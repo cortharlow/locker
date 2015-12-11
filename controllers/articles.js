@@ -6,9 +6,11 @@ var env = process.env.NODE_ENV;
 const key = process.env.KEY;
 
 function create(req, res){
+  console.log('HIT');
   let encodedUrl = encodeURIComponent(req.body.url);
+  console.log('Encoded URL: ' + encodedUrl);
   let apiUrl = 'http://api.embed.ly/1/extract?key=' + key + '&url=' + encodedUrl;
-  console.log(apiUrl);
+  console.log('API URL: ' + apiUrl);
   let user = req.params.user;
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);
