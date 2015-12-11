@@ -2,7 +2,7 @@
 let User = require('../models/User');
 let jwt = require('jsonwebtoken');
 let config = require('../config');
-const secret = config.secret;
+const secret = config.SECRET;
 
 function create(req, res){
   let newUser = new User(req.body);
