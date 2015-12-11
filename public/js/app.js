@@ -66,8 +66,8 @@ angular
 
     function getUsers(){
       $http
-        // .get('https://getlocker.herokuapp.com/user')
-        .get('http://localhost:5000/user')
+        .get('https://getlocker.herokuapp.com/user')
+        // .get('http://localhost:5000/user')
         .then(function(response){
           self.all = response.data.users;
         });
@@ -75,8 +75,8 @@ angular
 
     function addUser(){
       $http
-        // .post('https://getlocker.herokuapp.com/user/signup', self.newUser)
-        .post('http://localhost:5000/user/signup', self.newUser)
+        .post('https://getlocker.herokuapp.com/user/signup', self.newUser)
+        // .post('http://localhost:5000/user/signup', self.newUser)
         .then(function(response){
           if (response.data.success) {
             $window.localStorage.token = response.data.token;
@@ -89,8 +89,8 @@ angular
 
     function updateUser(){
       $http
-        // .put('https://getlocker.herokuapp.com/user', self.editUser)
-        .put('http://localhost:5000/user', self.editUser)
+        .put('https://getlocker.herokuapp.com/user', self.editUser)
+        // .put('http://localhost:5000/user', self.editUser)
         .then(function(data, status, headers, config){
           $window.localStorage.user = data.user;
         });
@@ -98,8 +98,8 @@ angular
 
     function loginUser(){
       $http
-        // .post('https://getlocker.herokuapp.com/user/auth', self.getUser)
-        .post('http://localhost:5000/user/auth', self.getUser)
+        .post('https://getlocker.herokuapp.com/user/auth', self.getUser)
+        // .post('http://localhost:5000/user/auth', self.getUser)
         .then(function(response){
           if (response.data.success) {
             $window.localStorage.token = response.data.token;
@@ -116,8 +116,8 @@ angular
 
     function deleteUser() {
       $http
-        // .delete('https://getlocker.herokuapp.com/user')
-        .delete('http://localhost:5000/user')
+        .delete('https://getlocker.herokuapp.com/user')
+        // .delete('http://localhost:5000/user')
         .then(function(){
           logoutUser();
         });
@@ -170,7 +170,8 @@ angular
         //   params: {user: $window.localStorage.user}
         // })
         // .get('https://getlocker.herokuapp.com/article/add')
-        .get('http://localhost:5000/article/' + $window.localStorage.user)
+        .get('https://getlocker.herokuapp.com/article/' + $window.localStorage.user)
+        // .get('http://localhost:5000/article/' + $window.localStorage.user)
         .then(function(response){
           if (response.data.length > 0) {
             for(var i = 0; i < response.data.length; i++) {
@@ -239,8 +240,8 @@ angular
       console.log($window.localStorage.token);
       $http
         ({
-          // url: "https://getlocker.herokuapp.com/add",
-          url: 'http://localhost:5000/article/add',
+          url: 'https://getlocker.herokuapp.com/article/add',
+          // url: 'http://localhost:5000/article/add',
           // url: 'http:localhost:5000/' + $window.localStorage.user,
           method: "POST",
           data: {url: self.newArticle.url, user: $window.localStorage.user}
@@ -253,8 +254,8 @@ angular
 
     function deleteArticle(id){
       $http({
-        // url: 'https://getlocker.herokuapp.com/' + id,
-        url: 'http://localhost:5000/article/' + id,
+        url: 'https://getlocker.herokuapp.com/article/' + id,
+        // url: 'http://localhost:5000/article/' + id,
         method: "DELETE"
       })
       .then(function(response){
