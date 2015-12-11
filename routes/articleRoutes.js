@@ -10,6 +10,8 @@ router.route('/article/:id')
 
 router.route('/article/:user')
   .get(article.get)
+
+router.route('/article/add')
   .post(article.create);
 
 module.exports = router;

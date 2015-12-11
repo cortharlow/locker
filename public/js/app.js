@@ -228,7 +228,7 @@ angular
       console.log($window.localStorage.user);
       $http
         ({
-          url: "https://getlocker.herokuapp.com/" + $window.localStorage.user,
+          url: "https://getlocker.herokuapp.com/add",
           method: "POST",
           data: self.newArticle,
           params: {"user": $window.localStorage.user}
