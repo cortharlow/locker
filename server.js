@@ -19,11 +19,11 @@ let articleRoutes = require('./routes/articleRoutes');
 let userRoutes    = require('./routes/userRoutes');
 
 // Set up app and body parser
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 // Use routes
 app.use(articleRoutes);
