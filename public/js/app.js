@@ -225,6 +225,7 @@ angular
 
     function addArticle(){
       console.log(self.newArticle);
+      console.log($window.localStorage.user);
       $http
         .post('https://getlocker.herokuapp.com/' + $window.localStorage.user, self.newArticle)
         .then(function(response){
