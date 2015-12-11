@@ -6,19 +6,18 @@ const path        = require('path');
 const request     = require('request');
 const bodyParser  = require('body-parser');
 const jwt         = require('jsonwebtoken');
-let config        = require('./config');
 const app         = express();
-const secret      = config.SECRET;
-const key         = config.KEY;
+const secret = process.env.SECRET;
+const key = process.env.KEY;
+// let config        = require('./config');
+// const secret      = config.SECRET;
+// const key         = config.KEY;
+
 let server        = require('http').createServer(app);
 
 // Require routes
 let articleRoutes = require('./routes/articleRoutes');
 let userRoutes = require('./routes/userRoutes');
-
-// Add Angular and Underscore
-app.use('/scripts', express.static(__dirname + '/node_modules/angular'))
-app.use('/scripts', express.static(__dirname + '/node_modules/underscore'))
 
 // Set up app and body parser
 app.use(logger('dev'));
@@ -32,7 +31,8 @@ app.use(userRoutes);
 
 // Create mongoose connection
 let mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/locker');
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/locker';
+mongoose.connect(mongoUri);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -40,8 +40,4 @@ db.once('open', function (callback) {
   console.log('Database Connection Established');
 });
 
-server.listen(3000, function() {
-  let host = server.address().address;
-  let port = server.address().port;
-  console.log('express running', host, port);
-});
+server.listen(process.env || 3000);
