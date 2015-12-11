@@ -27,24 +27,14 @@ Locker. App
 7. CSS blocks should be separated by a single new line
 
 ---------- Fonts ----------
-Header:
-  font-family: 'Abril Fatface', cursive;
-  font-family: 'adobe-garamond-pro', serif;
-
-Text:
-  font-family: 'Droid Sans', sans-serif;
-  font-family: 'Droid Serif', serif;
+All Text:
+  font-family: 'Helvetica', sans-serif;
 
 --------- Colors ----------
-Black and White
-
-Basic Theme:
-  Navigation Bar, Text, Headers - #212121
-  Background, Title - #F5F5F5
-  Dividers - #EEEEEE
+Minimalistic Black and White:
+  Black: #000000;
+  White: #ffffff;
 */
-
-@import url(https://fonts.googleapis.com/css?family=Droid+Serif|Abril+Fatface|Droid+Sans);
 
 html, body {
   margin: 0;
