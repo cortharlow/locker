@@ -1,8 +1,9 @@
 'use strict';
 let User = require('../models/User');
 let jwt = require('jsonwebtoken');
-let config = require('../config');
-const secret = config.secret;
+const secret = process.env.SECRET
+// let config = require('../config');
+// const secret = config.SECRET;
 
 function create(req, res){
   let newUser = new User(req.body);

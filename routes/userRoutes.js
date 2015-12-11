@@ -5,8 +5,9 @@ let bodyParser      = require('body-parser');
 let methodOverride  = require('method-override');
 let user = require('../controllers/users');
 let expressJWT = require('express-jwt');
-let config = require('../config');
-const secret = config.secret;
+const secret = process.env.SECRET
+// let config = require('../config');
+// let secret = config.SECRET;
 
 router.route('/user')
   .all(expressJWT({

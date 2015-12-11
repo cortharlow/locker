@@ -2,8 +2,9 @@
 const request     = require('request');
 const bodyParser  = require('body-parser');
 let Article       = require('../models/Article');
-let config        = require('../config');
-const key = config.key;
+const key = process.env.SECRET;
+// let config        = require('../config');
+// const key = config.KEY;
 
 function create(req, res){
   let encodedUrl = encodeURIComponent(req.body.url);
