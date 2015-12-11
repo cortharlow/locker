@@ -171,7 +171,6 @@ angular
         // })
         // .get('https://getlocker.herokuapp.com/article/add')
         .get('https://getlocker.herokuapp.com/article/' + $window.localStorage.user)
-        // .get('http://localhost:5000/article/' + $window.localStorage.user)
         .then(function(response){
           if (response.data.length > 0) {
             for(var i = 0; i < response.data.length; i++) {
