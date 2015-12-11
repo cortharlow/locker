@@ -9,9 +9,6 @@ const jwt         = require('jsonwebtoken');
 const app         = express();
 const secret = process.env.SECRET;
 const key = process.env.KEY;
-// let config        = require('./config');
-// const secret      = config.SECRET;
-// const key         = config.KEY;
 
 let server        = require('http').createServer(app);
 

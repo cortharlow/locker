@@ -2,7 +2,7 @@
 const request     = require('request');
 const bodyParser  = require('body-parser');
 let Article       = require('../models/Article');
-const key = process.env.SECRET;
+const key = process.env.KEY;
 // let config        = require('../config');
 // const key = config.KEY;
 
