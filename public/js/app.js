@@ -163,7 +163,7 @@ angular
           method: "GET",
           params: {"user": $window.localStorage.user}
         })
-        .get('https://getlocker.herokuapp.com/article/add')
+        // .get('https://getlocker.herokuapp.com/article/add')
         .then(function(response){
           if (response.data.length > 0) {
             for(var i = 0; i < response.data.length; i++) {
