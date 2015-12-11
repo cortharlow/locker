@@ -12,7 +12,7 @@ var env           = process.env.NODE_ENV;
 const secret      = process.env.SECRET;
 const key         = process.env.KEY;
 
-let server        = require('https').createServer(app);
+let server        = require('http').createServer(app);
 
 // Require routes
 let articleRoutes = require('./routes/articleRoutes');
