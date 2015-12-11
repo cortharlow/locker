@@ -25,7 +25,7 @@ router.route('/user/auth')
 
 // Verify protected routes
 router.use(function(req, res, next) {
-  var token = req.body.token || req.query.token;
+  var token = req.body.token || req.query.token || req.headers['x-access'];
   console.log(token);
   // Decode token
   if(token) {
