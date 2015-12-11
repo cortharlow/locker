@@ -7,6 +7,7 @@ const request     = require('request');
 const bodyParser  = require('body-parser');
 const jwt         = require('jsonwebtoken');
 const app         = express();
+var env = process.env.NODE_ENV;
 const secret = process.env.SECRET;
 const key = process.env.KEY;
 

@@ -1,6 +1,7 @@
 'use strict';
 let User = require('../models/User');
 let jwt = require('jsonwebtoken');
+var env = process.env.NODE_ENV;
 const secret = process.env.SECRET;
 
 function create(req, res){

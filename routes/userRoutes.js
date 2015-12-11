@@ -5,6 +5,7 @@ let bodyParser      = require('body-parser');
 let methodOverride  = require('method-override');
 let user = require('../controllers/users');
 let expressJWT = require('express-jwt');
+var env = process.env.NODE_ENV;
 const secret = process.env.SECRET
 
 router.route('/user')
