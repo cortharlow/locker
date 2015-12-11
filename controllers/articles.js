@@ -11,7 +11,8 @@ function create(req, res){
   console.log('Encoded URL: ' + encodedUrl);
   let apiUrl = 'http://api.embed.ly/1/extract?key=' + key + '&url=' + encodedUrl;
   console.log('API URL: ' + apiUrl);
-  let user = req.params.user;
+  // let user = req.params.user;
+  let user = req.body.user;
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);
     let newArticle = new Article({

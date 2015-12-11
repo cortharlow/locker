@@ -224,14 +224,12 @@ angular
     }
 
     function addArticle(){
-      console.log(self.newArticle);
-      console.log($window.localStorage.user);
+      console.log(self.newArticle.url);
       $http
         ({
           url: "https://getlocker.herokuapp.com/add",
           method: "POST",
-          data: self.newArticle,
-          params: {"user": $window.localStorage.user}
+          data: {"url": self.newArticle.url, "user": $window.localStorage.user}
         })
         // .post('https://getlocker.herokuapp.com/' + $window.localStorage.user, self.newArticle)
         .then(function(response){
