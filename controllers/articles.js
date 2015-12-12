@@ -12,8 +12,11 @@ function create(req, res){
   let apiUrl = 'https://api.embed.ly/1/extract?key=' + key + '&url=' + encodedUrl;
   console.log('API URL: ' + apiUrl);
   let user = req.body.user;
+  console.log('USER: ' + user);
+  console.log('USER req.body.user: ' + req.body.user);
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);
+    console.log(info);
     let newArticle = new Article({
       _userId: user,
       url: info.url,

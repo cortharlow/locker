@@ -234,9 +234,6 @@ angular
     }
 
     function addArticle(){
-      console.log(self.newArticle.url);
-      console.log($window.localStorage.user);
-      console.log($window.localStorage.token);
       $http
         ({
           url: 'https://getlocker.herokuapp.com/article/add',
