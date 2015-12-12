@@ -239,7 +239,7 @@ angular
       console.log($window.localStorage.token);
       $http
         ({
-          url: 'https://getlocker.herokuapp.com/article/add',
+          url: 'https://getlocker.herokuapp.com/article/' + $window.localStorage.user,
           // url: 'http://localhost:5000/article/add',
           // url: 'http:localhost:5000/' + $window.localStorage.user,
           method: "POST",
