@@ -9,7 +9,7 @@ function create(req, res){
   console.log('HIT');
   let encodedUrl = encodeURIComponent(req.body.url);
   console.log('Encoded URL: ' + encodedUrl);
-  let apiUrl = 'https://api.embed.ly/1/extract?key=' + key + '&url=' + encodedUrl;
+  let apiUrl = 'http://api.embed.ly/1/extract?key=' + key + '&url=' + encodedUrl;
   console.log('API URL: ' + apiUrl);
   let user = req.body.user;
   console.log('USER: ' + user);
