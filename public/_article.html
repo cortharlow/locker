@@ -1,0 +1,15 @@
+<div ng-init="articles.getArticles()"></div>
+<div ng-repeat="article in articles.listArticles | filter: articleId" class="article-body" >
+  <div class="content-info">
+    <p><a href="{{ article.url }}"> {{ article.provider }} </a></p>
+  </div>
+  <div class="description-text">
+      <h3>{{ article.title }}</h3>
+  </div>
+  <div ng-bind-html="article.content" id="content">
+    {{ article.content }}
+  </div>
+  <div ng-bind-html="article.media">
+    {{ article.media }}
+  </div>
+</div>
