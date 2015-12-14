@@ -75,7 +75,8 @@ angular
 
     function addUser(){
       $http
-        .post('https://getlocker.herokuapp.com/user/signup', self.newUser)
+        .post('/user/signup', self.newUser)
+        // .post('https://getlocker.herokuapp.com/user/signup', self.newUser)
         // .post('http://localhost:5000/user/signup', self.newUser)
         .then(function(response){
           if (response.data.success) {
@@ -98,7 +99,8 @@ angular
 
     function loginUser(){
       $http
-        .post('https://getlocker.herokuapp.com/user/auth', self.getUser)
+        .post('/user/auth', self.getUser)
+        // .post('https://getlocker.herokuapp.com/user/auth', self.getUser)
         // .post('http://localhost:5000/user/auth', self.getUser)
         .then(function(response){
           if (response.data.success) {
