@@ -19,7 +19,6 @@ let articleRoutes = require('./routes/articleRoutes');
 let userRoutes    = require('./routes/userRoutes');
 
 // Set up app and body parser
-app.use(cors);
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
