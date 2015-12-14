@@ -1,0 +1,10 @@
+<div ng-init="articles.getArticles()"></div>
+<div ng-repeat="article in articles.listArticles | filter: articleId" class="article-body" >
+  <h1>{{ article.title }}</h1>
+  <div ng-bind-html="article.content" id="content">
+    {{ article.content }}
+  </div>
+  <div ng-bind-html="article.media" id="video">
+    {{ article.media }}
+  </div>
+</div>

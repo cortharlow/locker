@@ -23,8 +23,10 @@ function create(req, res){
       title: info.title,
       description: info.description,
       content: info.content,
+      media: info.media.html,
       provider: info.provider_name
     });
+    console.log(newArticle.media);
     newArticle.save((err) => {
       if (err) {
         res.status(400).send(err);

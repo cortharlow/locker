@@ -6,7 +6,7 @@
       <p id="remove" class="remove" type="submit" ng-click="articles.deleteArticle(article.id);">Remove</p>
     </div>
     <div class="article-content">
-      <a target="_blank" href="{{article.url}}">
+      <a target="_blank" ui-sref="article({ articleId: article.id })">
         <h1>{{article.title}}</h1>
           <p id="description">{{article.description}}</p>
           <p id="provider">{{article.provider}}</p>
