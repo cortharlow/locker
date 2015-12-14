@@ -66,7 +66,7 @@ angular
 
     function getUsers(){
       $http
-        .get('https://getlocker.herokuapp.com/user')
+        .get('/user')
         // .get('http://localhost:5000/user')
         .then(function(response){
           self.all = response.data.users;
@@ -90,7 +90,7 @@ angular
 
     function updateUser(){
       $http
-        .put('https://getlocker.herokuapp.com/user', self.editUser)
+        .put('/user', self.editUser)
         // .put('http://localhost:5000/user', self.editUser)
         .then(function(data, status, headers, config){
           $window.localStorage.user = data.user;
@@ -118,7 +118,7 @@ angular
 
     function deleteUser() {
       $http
-        .delete('https://getlocker.herokuapp.com/user')
+        .delete('/user')
         // .delete('http://localhost:5000/user')
         .then(function(){
           logoutUser();
@@ -172,7 +172,7 @@ angular
         //   params: {user: $window.localStorage.user}
         // })
         // .get('https://getlocker.herokuapp.com/article/add')
-        .get('https://getlocker.herokuapp.com/article/' + $window.localStorage.user)
+        .get('/article/' + $window.localStorage.user)
         .then(function(response){
           if (response.data.length > 0) {
             for(var i = 0; i < response.data.length; i++) {
@@ -238,7 +238,7 @@ angular
     function addArticle(){
       $http
         ({
-          url: 'https://getlocker.herokuapp.com/article/add',
+          url: '/article/add',
           // url: 'http://localhost:5000/article/add',
           // url: 'http:localhost:5000/' + $window.localStorage.user,
           method: "POST",
@@ -252,7 +252,7 @@ angular
 
     function deleteArticle(id){
       $http({
-        url: 'https://getlocker.herokuapp.com/article/' + id,
+        url: '/article/' + id,
         // url: 'http://localhost:5000/article/' + id,
         method: "DELETE"
       })
