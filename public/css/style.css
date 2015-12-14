@@ -163,7 +163,7 @@ footer li {
   border: 1px solid #222222;
 }
 .description-button:hover {
-  background-color: #FFFFFF;
+  background-color: #222222;
 }
 .description-button.hidden {
   display: none;
@@ -330,9 +330,13 @@ footer li {
 .content-info:hover p {
   text-decoration: underline;
 }
+#content {
+  margin-bottom: 10%;
+}
 #content img {
   display: block;
   margin: auto;
+  max-width: 100%;
 }
 #content p {
   width: 90%;
@@ -345,6 +349,15 @@ footer li {
 #content a {
   text-decoration: underline;
   color: #222222;
+}
+#content pre {
+  width: 80%;
+  font-size: 120%;
+  line-height: 400%;
+  background-color: #D3D3D3;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: scroll;
 }
 .embedly-embed {
   width: 100% !important;
