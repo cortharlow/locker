@@ -234,7 +234,6 @@ angular
     }
 
     function addArticle(){
-      debugger;
       $http
         ({
           url: '/article/add',

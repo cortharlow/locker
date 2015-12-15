@@ -223,6 +223,18 @@ footer li {
    color: #FFFFFF;
    font-weight: bold;
 }
+.article-input:-moz-placeholder {
+   color: #FFFFFF;
+   font-weight: bold;
+}
+.article-input::-moz-placeholder {
+   color: #FFFFFF;
+   font-weight: bold;
+}
+.article-input:-ms-input-placeholder {
+   color: #FFFFFF;
+   font-weight: bold;
+}
 .article-button {
   width:10%;
   background-color: #FFFFFF;
@@ -276,7 +288,8 @@ footer li {
   color: #FFFFFF;
 }
 #remove {
-  margin-top: 120%;
+  /*margin-top: 120%;*/
+  bottom: 0;
   color: #222222;
   cursor: pointer;
 }
