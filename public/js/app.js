@@ -83,7 +83,8 @@ angular
         .then(function(response){
           if (response.data.success) {
             $window.localStorage.token = response.data.token;
-            $window.localStorage.user = response.data.user._id;
+            $window.localStorage.setItem("user", response.data.user._id);
+            // $window.localStorage.user = response.data.user._id;
             self.message = 'Success';
             $state.go('locker');
           }
@@ -94,7 +95,7 @@ angular
       $http
         .put('/user', self.editUser)
         .then(function(data, status, headers, config){
-          $window.localStorage.user = data.user;
+          $window.localStorage.setItem("user", data.user);
         });
     }
 
@@ -104,12 +105,13 @@ angular
         .then(function(response){
           if (response.data.success) {
             $window.localStorage.token = response.data.token;
-            $window.localStorage.user = response.data.user;
+            // $window.localStorage.user = response.data.user;
+            localStorage.setItem("user", response.data.user);
             self.message = 'Success';
             $state.go('locker');
           } else {
             delete $window.localStorage.token;
-            delete $window.localStorage.user;
+            delete $window.localStorage.getItem("user");
             self.message = 'Error';
           }
         })
@@ -125,7 +127,7 @@ angular
 
     function logoutUser() {
       delete $window.localStorage.token;
-      delete $window.localStorage.user;
+      delete $window.localStorage.getItem("user");
       $state.go('home');
     }
   })
@@ -167,7 +169,7 @@ angular
 
     function getArticles(){
       $http
-        .get('/article/' + $window.localStorage.user)
+        .get('/article/' + localStorage.getItem("user"))
         .then(function(response){
           if (response.data.length > 0) {
             for(var i = 0; i < response.data.length; i++) {
@@ -232,11 +234,12 @@ angular
     }
 
     function addArticle(){
+      debugger;
       $http
         ({
           url: '/article/add',
           method: "POST",
-          data: {url: self.newArticle.url, user: $window.localStorage.user}
+          data: {url: self.newArticle.url, user: $window.localStorage.getItem("user")}
         })
         .then(function(response){
           $window.location.reload();

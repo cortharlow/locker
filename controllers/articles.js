@@ -2,21 +2,33 @@
 const request     = require('request');
 const bodyParser  = require('body-parser');
 let Article       = require('../models/Article');
+let User          = require('../models/User');
 var env = process.env.NODE_ENV;
 const key = process.env.KEY;
 
 function create(req, res){
-  console.log('HIT');
+  var user;
+  if (req.body.email) {
+    User.findOne({email: req.body.email}, (err, userObj) => {
+      if (err) {
+        console.log(err);
+      }
+      else if (userObj) {
+        user = userObj._id;
+      }
+    })
+  }
+  else {
+    user = req.body.user;
+    console.log('USER: ' + user);
+  }
   let encodedUrl = encodeURIComponent(req.body.url);
   console.log('Encoded URL: ' + encodedUrl);
   let apiUrl = 'http://api.embed.ly/1/extract?key=' + key + '&url=' + encodedUrl;
   console.log('API URL: ' + apiUrl);
-  let user = req.body.user;
-  console.log('USER: ' + user);
-  console.log('USER req.body.user: ' + req.body.user);
+
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);
-    console.log(info);
     let newArticle = new Article({
       _userId: user,
       url: info.url,
@@ -26,14 +38,14 @@ function create(req, res){
       media: info.media.html,
       provider: info.provider_name
     });
-    console.log(newArticle.media);
     newArticle.save((err) => {
       if (err) {
         res.status(400).send(err);
-        console.log(newArticle.title + 'Not Saved');
+        console.log(err);
+        console.log(newArticle.title + ' Not Saved');
       } else {
         res.status(200).send(newArticle);
-        console.log(newArticle.title + "Saved");
+        console.log(newArticle.title + ' Saved');
       }
     });
   });
