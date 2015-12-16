@@ -484,13 +484,9 @@ button {
   margin-top: 1000%;
   transition: all .05s;
 }
-.menu-background {
-  background-color: #FFFFFF;
-  padding: 100%;
-}
 .bar {
   position: fixed;
-  left: 90%;
+  left: 90.15%;
   top: 8%;
   height: 14px;
   width: 70px;

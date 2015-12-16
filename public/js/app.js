@@ -34,11 +34,6 @@ angular
           }
         }
       })
-      // .state('article', {
-      //   url: "/article/:articleId",
-      //   templateUrl: "_article.html",
-      //   controller: "ArticlesController as articles"
-      // });
       .state('article', {
         url: "/article/:articleId",
         views: {
@@ -55,20 +50,6 @@ angular
 
     $urlRouterProvider.otherwise("/");
   })
-
-//////////////////INDEX CONTROLLER////////////////////
-  // .controller('MenuController', [ '$scope', '$state', '$http', '$window', function ($scope, $state, $http, $window){
-  //
-  //   var refresh = 0;
-  //   if($window.localStorage.token) {
-  //     $scope.menu = true;
-  //     if (refresh < 1) {
-  //       $window.location.reload();
-  //       refresh += 1;
-  //     }
-  //   }
-  // }])
-
 
 //////////////////USERS CONTROLLER////////////////////
 
