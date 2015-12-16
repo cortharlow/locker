@@ -34,14 +34,41 @@ angular
           }
         }
       })
+      // .state('article', {
+      //   url: "/article/:articleId",
+      //   templateUrl: "_article.html",
+      //   controller: "ArticlesController as articles"
+      // });
       .state('article', {
         url: "/article/:articleId",
-        templateUrl: "_article.html",
-        controller: "ArticlesController as articles"
+        views: {
+          "": {
+            templateUrl: "_article.html",
+            controller: "ArticlesController as articles"
+          },
+          "footer@article": {
+            templateUrl: "_footer.html",
+            controller: "UsersController as users"
+          }
+        }
       });
 
     $urlRouterProvider.otherwise("/");
   })
+
+//////////////////INDEX CONTROLLER////////////////////
+  // .controller('MenuController', [ '$scope', '$state', '$http', '$window', function ($scope, $state, $http, $window){
+  //
+  //   var refresh = 0;
+  //   if($window.localStorage.token) {
+  //     $scope.menu = true;
+  //     if (refresh < 1) {
+  //       $window.location.reload();
+  //       refresh += 1;
+  //     }
+  //   }
+  // }])
+
 
 //////////////////USERS CONTROLLER////////////////////
 
@@ -158,6 +185,7 @@ angular
 //////////////////ARTICLES CONTROLLER////////////////////
 
   .controller('ArticlesController', [ '$sce', '$rootScope', '$scope', '$stateParams', '$state', '$http', '$window', function ($sce, $rootScope, $scope, $stateParams, $state, $http, $window) {
+
     $scope.articleId = $stateParams.articleId;
     var self = this;
     self.listArticles = [];
@@ -166,6 +194,8 @@ angular
     self.getArticles = getArticles;
     self.getArticle = {};
     self.deleteArticle = deleteArticle;
+
+    self.logout = logout;
 
     function getArticles(){
       $http
@@ -255,4 +285,11 @@ angular
         $window.location.reload();
       })
     }
+
+    function logout() {
+      delete $window.localStorage.token;
+      delete $window.localStorage.getItem("user");
+      $state.go('home');
+    }
+
   }])
