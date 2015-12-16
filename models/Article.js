@@ -11,6 +11,7 @@ let article = new mongoose.Schema({
   title: {type: String, required: true},
   description: {type: String, required: true},
   content: String,
+  image: String,
   media: String,
   provider: String,
   created_at: {type: Date, default: Date.now, required: true}

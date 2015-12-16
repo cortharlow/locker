@@ -222,6 +222,7 @@ angular
                 "description": response.data[i].description,
                 "provider": response.data[i].provider,
                 "content": $sce.trustAsHtml(response.data[i].content),
+                "image": response.data[i].image,
                 "media": $sce.trustAsHtml(response.data[i].media),
                 "url": response.data[i].url,
                 "date": date

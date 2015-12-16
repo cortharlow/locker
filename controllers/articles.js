@@ -16,16 +16,39 @@ function create(req, res){
   console.log('USER req.body.user: ' + req.body.user);
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);
+    let newArticle;
     console.log(info);
-    let newArticle = new Article({
-      _userId: user,
-      url: info.url,
-      title: info.title,
-      description: info.description,
-      content: info.content,
-      media: info.media.html,
-      provider: info.provider_name
-    });
+    if (info.images[1].url) {
+      newArticle = new Article({
+        _userId: user,
+        url: info.url,
+        title: info.title,
+        description: info.description,
+        image: info.images[1].url,
+        provider: info.provider_name
+      })
+    }
+    else if (info.media.html) {
+      newArticle = new Article({
+        _userId: user,
+        url: info.url,
+        title: info.title,
+        description: info.description,
+        content: info.content,
+        media: info.media.html,
+        provider: info.provider_name
+      })
+    }
+    else {
+      newArticle = new Article({
+        _userId: user,
+        url: info.url,
+        title: info.title,
+        description: info.description,
+        content: info.content,
+        provider: info.provider_name
+      });
+    }
     console.log(newArticle.media);
     newArticle.save((err) => {
       if (err) {
