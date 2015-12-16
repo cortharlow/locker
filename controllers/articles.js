@@ -2,33 +2,58 @@
 const request     = require('request');
 const bodyParser  = require('body-parser');
 let Article       = require('../models/Article');
+let User          = require('../models/User');
 var env = process.env.NODE_ENV;
 const key = process.env.KEY;
 
 function create(req, res){
-  console.log('HIT');
+  var user;
+  if (req.body.email) {
+    User.findOne({email: req.body.email}, (err, userObj) => {
+      if (err) {
+        console.log(err);
+      }
+      else if (userObj) {
+        user = userObj._id;
+      }
+    })
+  }
+  else {
+    user = req.body.user;
+    console.log('USER: ' + user);
+  }
   let encodedUrl = encodeURIComponent(req.body.url);
   console.log('Encoded URL: ' + encodedUrl);
   let apiUrl = 'http://api.embed.ly/1/extract?key=' + key + '&url=' + encodedUrl;
   console.log('API URL: ' + apiUrl);
-  let user = req.body.user;
-  console.log('USER: ' + user);
-  console.log('USER req.body.user: ' + req.body.user);
+
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);
     let newArticle;
-    console.log(info);
-    if (info.images[1].url) {
-      newArticle = new Article({
-        _userId: user,
-        url: info.url,
-        title: info.title,
-        description: info.description,
-        image: info.images[1].url,
-        provider: info.provider_name
-      })
+    if (info.images[1] !== undefined && info.media.type !== 'video') {
+      console.log(info.images.length);
+      if (info.images.length > 2){ //Article
+        newArticle = new Article({
+          _userId: user,
+          url: info.url,
+          title: info.title,
+          description: info.description,
+          content: info.content,
+          provider: info.provider_name
+        });
+      }
+      else {
+        newArticle = new Article({ //Image
+          _userId: user,
+          url: info.url,
+          title: info.title,
+          description: info.description,
+          image: info.images[1].url,
+          provider: info.provider_name
+        })
+      }
     }
-    else if (info.media.html) {
+    else if (info.media.html) { //Video or GIF
       newArticle = new Article({
         _userId: user,
         url: info.url,
@@ -39,24 +64,25 @@ function create(req, res){
         provider: info.provider_name
       })
     }
-    else {
+    else { //Back up for those articles/items that have no images or media
       newArticle = new Article({
-        _userId: user,
-        url: info.url,
-        title: info.title,
-        description: info.description,
-        content: info.content,
-        provider: info.provider_name
-      });
+          _userId: user,
+          url: info.url,
+          title: info.title,
+          description: info.description,
+          content: info.content,
+          provider: info.provider_name
+        });
     }
-    console.log(newArticle.media);
+    console.log(newArticle);
     newArticle.save((err) => {
       if (err) {
         res.status(400).send(err);
-        console.log(newArticle.title + 'Not Saved');
+        console.log(err);
+        console.log(newArticle.title + ' Not Saved');
       } else {
         res.status(200).send(newArticle);
-        console.log(newArticle.title + "Saved");
+        console.log(newArticle.title + ' Saved');
       }
     });
   });

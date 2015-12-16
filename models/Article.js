@@ -8,8 +8,8 @@ let article = new mongoose.Schema({
     required: true
   },
   url: {type: String, required: true},
-  title: {type: String, required: true},
-  description: {type: String, required: true},
+  title: String,
+  description: String,
   content: String,
   image: String,
   media: String,
