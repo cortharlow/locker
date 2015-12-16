@@ -46,7 +46,20 @@ angular
             controller: "UsersController as users"
           }
         }
-      });
+      })
+      .state('room', {
+        url: "/locker/room",
+        views: {
+          "": {
+            templateUrl: "_locker-room.html",
+            controller: "UsersController as users"
+          },
+          "footer@room": {
+            templateUrl: "_footer.html",
+            controller: "UsersController as users"
+          }
+        }
+      })
 
     $urlRouterProvider.otherwise("/");
   })
@@ -55,9 +68,9 @@ angular
 
   .controller('UsersController', function UsersController($scope, $state, $http, $window){
 
-    if($window.localStorage.token) {
-      $state.go('locker');
-    }
+    // if($window.localStorage.token) {
+    //   $state.go('locker');
+    // }
 
     var self = this;
     self.all = [];
@@ -81,9 +94,28 @@ angular
       $http
         .get('/user')
         .then(function(response){
-          self.all = response.data.users;
+          if (response.data.length > 0) {
+            for (var i = 0; i < response.data.length; i++) {
+              self.all.push({
+                "name": response.data[i].name
+              })
+            }
+          }
         });
     }
+    //
+    // self.listArticles.push({
+    //   "id": response.data[i]._id,
+    //   "saved": response.data[i].created_at,
+    //   "title": response.data[i].title,
+    //   "description": response.data[i].description,
+    //   "provider": response.data[i].provider,
+    //   "content": $sce.trustAsHtml(response.data[i].content),
+    //   "image": response.data[i].image,
+    //   "media": $sce.trustAsHtml(response.data[i].media),
+    //   "url": response.data[i].url,
+    //   "date": date
+    // });
 
     function addUser(){
       $http

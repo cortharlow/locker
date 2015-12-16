@@ -1,0 +1,8 @@
+<div ng-init="users.getUsers()"></div>
+<div class="users-container">
+  <div class="user" ng-repeat="user in users.all">
+    <p>{{user.name}}</p> <button>Follow</button>
+  </div>
+</div>
+
+<div ui-view="footer"></div>

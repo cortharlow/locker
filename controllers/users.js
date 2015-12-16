@@ -22,6 +22,7 @@ function create(req, res){
 function get(req, res) {
   User.find({}, (err, users) => {
     res.send(users);
+    console.log(users);
   });
 }
 
