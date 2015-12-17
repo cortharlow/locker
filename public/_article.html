@@ -1,21 +1,3 @@
-<script>
-  $(".menu-collapsed").click(function() {
-    console.log('Click');
-    $(this).toggleClass("menu-expanded");
-  });
-</script>
-<div class="menu-collapsed">
-  <div class="bar"></div>
-<nav>
-  <ul>
-    <li><a ui-sref="locker"><div class="menu-link">Locker.</div></a></li>
-    <li><a href="#"><div class="menu-link">About</div></a></li>
-    <li><a target="_blank" href="https://chrome.google.com/webstore/detail/locker-extension/echcameeafciikhiedhllacbfkoialdp"><div class="menu-link">Extension</div></a></li>
-    <li type="submit" ng-click="articles.logout()" class="menu-link"><a>Logout</a></li>
-  </ul>
-</nav>
-</div>
-
 <div ng-init="articles.getArticles()"></div>
 <div ng-repeat="article in articles.listArticles | filter: articleId" class="article-body" >
   <div class="content-info">
@@ -31,6 +13,8 @@
     {{ article.media }}
   </div>
   <div>
-    <img id="image" src="{{ article.image }}">
+    <img id="image" ng-src="{{ article.image }}">
   </div>
 </div>
+
+<div ui-view="footer"></div>

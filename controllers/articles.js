@@ -30,7 +30,7 @@ function create(req, res){
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);
     let newArticle;
-    if (info.images[1] !== undefined && info.media.type !== 'video') {
+    if (info.images.length > 0 && info.media.type !== 'video') {
       console.log(info.images.length);
       if (info.images.length > 2){ //Article
         newArticle = new Article({
@@ -53,7 +53,7 @@ function create(req, res){
         })
       }
     }
-    else if (info.media.html) { //Video or GIF
+    else if (info.media !== undefined && info.media.html) { //Video or GIF
       newArticle = new Article({
         _userId: user,
         url: info.url,

@@ -30,7 +30,7 @@ angular
           },
           "footer@locker": {
             templateUrl: "_footer.html",
-            controller: "UsersController as users"
+            controller: "ArticlesController as articles"
           }
         }
       })
@@ -43,10 +43,23 @@ angular
           },
           "footer@article": {
             templateUrl: "_footer.html",
-            controller: "UsersController as users"
+            controller: "ArticlesController as articles"
           }
         }
-      });
+      })
+      .state('search', {
+        url: "/search",
+        views: {
+          "": {
+            templateUrl: "_search.html",
+            controller: "ArticlesController as articles"
+          },
+          "footer@search": {
+            templateUrl: "_footer.html",
+            controller: "ArticlesController as articles"
+          }
+        }
+      })
 
     $urlRouterProvider.otherwise("/");
   })
@@ -75,8 +88,7 @@ angular
     self.editUser = {};
 
     self.deleteUser = deleteUser;
-    self.logoutUser = logoutUser;
-
+    
     function getUsers(){
       $http
         .get('/user')
@@ -91,8 +103,7 @@ angular
         .then(function(response){
           if (response.data.success) {
             $window.localStorage.token = response.data.token;
-            $window.localStorage.setItem("user", response.data.user._id);
-            // $window.localStorage.user = response.data.user._id;
+            $window.localStorage.user = response.data.user._id;
             self.message = 'Success';
             $state.go('locker');
           }
@@ -103,7 +114,7 @@ angular
       $http
         .put('/user', self.editUser)
         .then(function(data, status, headers, config){
-          $window.localStorage.setItem("user", data.user);
+          $window.localStorage.user =  data.user;
         });
     }
 
@@ -113,13 +124,12 @@ angular
         .then(function(response){
           if (response.data.success) {
             $window.localStorage.token = response.data.token;
-            // $window.localStorage.user = response.data.user;
-            localStorage.setItem("user", response.data.user);
+            $window.localStorage.user = response.data.user;
             self.message = 'Success';
             $state.go('locker');
           } else {
             delete $window.localStorage.token;
-            delete $window.localStorage.getItem("user");
+            delete $window.localStorage.user;
             self.message = 'Error';
           }
         })
@@ -131,12 +141,6 @@ angular
         .then(function(){
           logoutUser();
         });
-    }
-
-    function logoutUser() {
-      delete $window.localStorage.token;
-      delete $window.localStorage.getItem("user");
-      $state.go('home');
     }
   })
 
@@ -152,6 +156,7 @@ angular
       response: function (response) {
         if (response.status === 401) {
           // handle the case where the user is not authenticated
+          $window.location.path('/');
         }
         return response || $q.when(response);
       }
@@ -169,6 +174,7 @@ angular
 
     $scope.articleId = $stateParams.articleId;
     var self = this;
+    self.search = {}; //Article search
     self.listArticles = [];
     self.addArticle = addArticle;
     self.newArticle = {};
@@ -177,6 +183,10 @@ angular
     self.deleteArticle = deleteArticle;
 
     self.logout = logout;
+
+    function refresh() {
+      $window.location.reload();
+    }
 
     function getArticles(){
       $http
@@ -246,8 +256,9 @@ angular
     }
 
     function addArticle(){
-      $http
-        ({
+      console.log(self.newArticle.url);
+      if (self.newArticle.url !== '') {
+        $http({
           url: '/article/add',
           method: "POST",
           data: {url: self.newArticle.url, user: $window.localStorage.getItem("user")}
@@ -255,6 +266,7 @@ angular
         .then(function(response){
           $window.location.reload();
         });
+      }
       self.newArticle = {};
     }
 
@@ -270,7 +282,7 @@ angular
 
     function logout() {
       delete $window.localStorage.token;
-      delete $window.localStorage.getItem("user");
+      delete $window.localStorage.user;
       $state.go('home');
     }
 

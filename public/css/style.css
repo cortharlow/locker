@@ -235,6 +235,10 @@ footer li {
    color: #FFFFFF;
    font-weight: bold;
 }
+#search {
+  width: 99%;
+  margin-top: 1%;
+}
 .article-button {
   width:10%;
   background-color: #222222;

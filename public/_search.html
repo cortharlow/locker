@@ -1,5 +1,8 @@
 <div ng-init="articles.getArticles()"></div>
 <div class="articles-container">
+  <div class="add-article">
+    <input ng-model="search" type="text" class="article-input" id="search" placeholder="Search">
+  </div>
   <div class="article" ng-repeat="article in articles.listArticles | filter: search">
     <div class="article-date">
       <p>{{article.date}}</p>
@@ -14,4 +17,5 @@
     </div>
   </div>
 </div>
+
 <div ui-view="footer"></div>
