@@ -31,7 +31,8 @@ Store it in your locker.
   - Articles:
     - Create, Read, and Delete; app retrieves article/image/video data from Embedly - nothing to edit or update.
 
-##### [Deployed to Heroku](http://getlocker.herokuapp.com/#/)
+#### [Deployed to Heroku](http://getlocker.herokuapp.com/#/)
+
 ---
 ### User Stories
 When using Locker, a user is able to:
@@ -44,6 +45,7 @@ Once logged in and authenticated:
   - Click on item to be taken to page to view item without any external styling
   - Use Hamburger Menu to switch between Add, Search, external link to Chrome Extension page, and Logout
   - Search for any items on search page
+
 ---
 ### Styling
 Locker was created with the intent of directing all attention to content by removing as many distractions as possible.
@@ -63,6 +65,7 @@ Lastly, large icons and input fields were used to make the transition to mobile 
 ![Extension Popup](https://i.imgur.com/N0bZ6c7.jpg)
 
 ![Extension Store](https://i.imgur.com/ph1mN5O.jpg)
+
 ---
 ### Versions and Upcoming Features
 **v1.0 - COMPLETE**
@@ -98,7 +101,8 @@ Lastly, large icons and input fields were used to make the transition to mobile 
 **Additional Features**
   - Make mobile friendly
   - Remove need to enter email address in Chrome Extension each time posting
-  ---
+
+---  
 #### Copyright notice:
 
 The media and information used in this app is for educational purposes.
