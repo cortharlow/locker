@@ -30,7 +30,7 @@ function create(req, res){
   request(apiUrl, (err, response, body) => {
     let info = JSON.parse(body);
     let newArticle;
-    if (info.images.length > 0 && info.media.type !== 'video') {
+    if (info.images.length > 1 && info.media.type !== 'video') {
       console.log(info.images.length);
       if (info.images.length > 2){ //Article
         newArticle = new Article({
