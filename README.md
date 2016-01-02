@@ -31,7 +31,7 @@ Store it in your locker.
   - Articles:
     - Create, Read, and Delete; app retrieves article/image/video data from Embedly - nothing to edit or update.
 
-* **Deployed to Heroku as [getlocker.herokuapp.com](http://getlocker.herokuapp.com/#/)
+* **Deployed to Heroku as [getlocker.herokuapp.com](http://getlocker.herokuapp.com/#/)**
 
 ---
 ### User Stories
