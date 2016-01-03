@@ -6,7 +6,7 @@ Store it in your locker.
 
 ---
 ### Tech Specs
-* **Technologies:**
+* **Technologies used:**
   - MEAN Stack
   - MongoDB and Mongoose, Express, AngularJS with UI-Router, and Node.js
   - Dependencies
