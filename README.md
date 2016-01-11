@@ -102,7 +102,7 @@ Lastly, large icons and input fields were used to make the transition to mobile 
   - Remove need to enter email address in Chrome Extension each time posting
 
 ---  
-#### Copyright notice:
+#### Copyright Notice
 
 The media and information used in this app is for educational purposes.
 
