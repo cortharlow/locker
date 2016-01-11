@@ -4,6 +4,9 @@ Find cool stuff online.
 
 Store it in your locker.
 
+![Splash Page](https://i.imgur.com/gmQPniL.jpg)
+[Demo](http://getlocker.herokuapp.com/#/)
+
 ---
 ### Tech Specs
 * **Technologies used:**
